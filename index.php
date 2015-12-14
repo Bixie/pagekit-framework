@@ -14,15 +14,29 @@ return [
 
 	],
 
-	'settings' => 'settings-framework',
+	'fieldtypes' => 'fieldtypes',
+
+	'resources' => [
+
+		'bixie/framework:' => ''
+
+	],
+
+	'settings' => 'settings-bixframework',
 
 	'config' => [
 
 	],
 
-	'fieldtypes' => 'fieldtypes',
-
 	'events' => [
+		'view.scripts' => function ($event, $scripts) use ($app) {
+			$scripts->register('framework-settings', 'bixie/framework:app/bundle/settings.js', '~extensions');
+			//register fields
+			$scripts->register('bixie-fieldtypes', 'bixie/framework:app/bundle/bixie-fieldtypes.js', ['vue']);
+			foreach ($app->module('bixie/framework')->getFieldTypes() as $fieldType) {
+				$fieldType->registerScripts($scripts);
+			}
+		}
 	]
 
 ];

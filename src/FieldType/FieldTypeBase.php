@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Bixie\Framework\Type;
+namespace Bixie\Framework\FieldType;
 
 use Bixie\Framework\Field\FieldBase;
 use Pagekit\Util\Arr;
 
-abstract class TypeBase implements TypeInterface, \ArrayAccess, \JsonSerializable {
+abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonSerializable {
 	/**
 	 * @var string
 	 */
@@ -40,7 +40,7 @@ abstract class TypeBase implements TypeInterface, \ArrayAccess, \JsonSerializabl
 	}
 
 	/**
-	 * @param FieldBase $item
+	 * @param FieldBase $field
 	 * @return array
 	 */
 	public function getOptions (FieldBase $field) {
@@ -53,7 +53,7 @@ abstract class TypeBase implements TypeInterface, \ArrayAccess, \JsonSerializabl
 	}
 
 	/**
-	 * @param FieldBase $item
+	 * @param FieldBase $field
 	 * @param array $value
 	 * @return array
 	 */
@@ -67,11 +67,11 @@ abstract class TypeBase implements TypeInterface, \ArrayAccess, \JsonSerializabl
 	}
 
 	/**
-	 * @param Field $field
+	 * @param FieldBase $field
 	 * @param array $value
 	 * @return array
 	 */
-	public function formatValue (Field $field, $value) {
+	public function formatValue (FieldBase $field, $value) {
 		if (is_callable($this->type['formatValue'])) {
 
 			return call_user_func($this->type['formatValue'], $field, $value);

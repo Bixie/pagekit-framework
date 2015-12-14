@@ -48,6 +48,6 @@
 
     };
 
-    window.Extensions.components['settings-framework'] = module.exports;
+    window.Extensions.components['settings-bixframework'] = module.exports;
 
 </script>

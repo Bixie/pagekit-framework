@@ -12,27 +12,30 @@
 
 namespace Bixie\Framework\Field;
 
+use Pagekit\Application as App;
+use Bixie\Framework\FieldType\FieldTypeBase;
 
 abstract class FieldBase implements FieldInterface {
 
 	/**
 	 * @var string
 	 */
-	public $type;
+	public $field_type;
 	/**
 	 * @var array
 	 */
 	public $options = [];
 
 	/**
+	 * @var FieldTypeBase
+	 */
+	protected $fieldType;
+
+	/**
 	 * @return array
 	 */
 	public function getOptions () {
-
-		/** @var \Bixie\Framework\Type\TypeBase $type */
-		$type = App::module('bixie/formmaker')->getType($this->type);
-
-		return $type->getOptions($this);
+		return $this->getFieldType()->getOptions($this);
 	}
 
 	/**
@@ -40,6 +43,13 @@ abstract class FieldBase implements FieldInterface {
 	 */
 	public function setOptions ($options) {
 		$this->options = $options;
+	}
+
+	public function getFieldType () {
+		if (!isset($this->fieldType)) {
+			$this->fieldType = App::module('bixie/framework')->getFieldType($this->field_type);
+		}
+		return $this->fieldType;
 	}
 
 }

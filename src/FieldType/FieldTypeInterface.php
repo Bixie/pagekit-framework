@@ -1,10 +1,10 @@
 <?php
 
-namespace Bixie\Framework\Type;
+namespace Bixie\Framework\FieldType;
 
 use Bixie\Framework\Field\FieldBase;
 
-interface TypeInterface  {
+interface FieldTypeInterface  {
 
 	/**
 	 * @return string
