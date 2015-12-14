@@ -25,6 +25,21 @@ module.exports = [
     },
 
     {
+        entry: {
+            "bixie-framework": "./app/framework.js"
+        },
+        output: {
+            filename: "./app/bundle/[name].js"
+        },
+        module: {
+            loaders: [
+                { test: /\.vue$/, loader: "vue" },
+                {test: /\.html$/, loader: "vue-html"}
+            ]
+        }
+    },
+
+    {
         entry: fieldtypes,
         output: {
             filename: "./app/bundle/[name].js"
