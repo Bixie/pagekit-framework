@@ -17,12 +17,6 @@ class FrameworkModule extends Module {
 	 */
 	public function main (App $app) {
 
-		$app['fieldtypes'] = function ($app) {
-//			if ($id = $app['request']->attributes->get('_field') and $field = Form::find($id)) {
-//				return $field;
-//			}
-
-		};
 	}
 
 	/**
@@ -55,6 +49,7 @@ class FrameworkModule extends Module {
 			foreach ($paths as $p) {
 				$package = array_merge ([
 					'id' => '',
+					'main' => '',
 					'class' => '\Bixie\Framework\FieldType\FieldType',
 					'resource' => 'bixie/framework:app/bundle',
 					'config' => [

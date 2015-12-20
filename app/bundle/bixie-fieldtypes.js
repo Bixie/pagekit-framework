@@ -87,10 +87,16 @@ var BixieFieldtypes =
 	window.BixieFieldtypes = module.exports = {
 
 	    props: {
-	        'fields': { type: Array, default: [] },
-	        'model': { type: Object, default: {} },
+	        'fields': { type: Array, default: function _default() {
+	                return [];
+	            } },
+	        'model': { type: Object, default: function _default() {
+	                return {};
+	            } },
 	        'editType': { type: String, default: '' },
-	        'form': { type: Object, default: {} }
+	        'form': { default: function _default() {
+	                return {};
+	            } }
 	    },
 
 	    computed: {

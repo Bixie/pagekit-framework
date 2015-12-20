@@ -30,6 +30,26 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 		$this->config = $type['config'];
 		unset($type['config']);
 		$this->type = $type;
+		if (is_callable($this->type['main'])) {
+			call_user_func($this->type['main']);
+		}
+	}
+
+	/**
+	 * @param \Pagekit\View\Asset\AssetManager $scripts
+	 */
+	public function registerScripts ($scripts) {
+		$script = $this->type['resource'] . '/fieldtype-' . $this->id . '.js';
+		$scripts->register('fieldtype-' . $this->id, $script, array_merge(['~bixie-fieldtypes'], $this->type['dependancies']));
+	}
+
+	/**
+	 * @param \Pagekit\View\Asset\AssetManager $styles
+	 */
+	public function addStyles ($styles) {
+		foreach ($this->type['styles'] as $name => $source) {
+			$styles->add($name, $source);
+		}
 	}
 
 	/**
@@ -92,23 +112,6 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 		} else {
 			//check for empty and return array
 			return is_array($value) ? count($value) ? $value : ['-'] : [$value ?: '-'];
-		}
-	}
-
-	/**
-	 * @param \Pagekit\View\Asset\AssetManager $scripts
-	 */
-	public function registerScripts ($scripts) {
-		$script = $this->type['resource'] . '/formmaker-' . $this->id . '.js';
-		$scripts->register('fieldtype-' . $this->id, $script, array_merge(['~bixie-fieldtypes'], $this->type['dependancies']));
-	}
-
-	/**
-	 * @param \Pagekit\View\Asset\AssetManager $styles
-	 */
-	public function addStyles ($styles) {
-		foreach ($this->type['styles'] as $name => $source) {
-			$styles->add($name, $source);
 		}
 	}
 

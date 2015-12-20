@@ -17,10 +17,10 @@
     window.BixieFieldtypes = module.exports = {
 
         props: {
-            'fields': {type: Array, default: []},
-            'model': {type: Object, default: {}},
-            'editType': {type: String,default: ''},
-            'form': {type: Object,default: {}}
+            'fields': {type: Array, default: function () { return [];}},
+            'model': {type: Object, default: function () { return {};}},
+            'editType': {type: String, default: ''},
+            'form': {default: function () { return {};}}
         },
 
         computed: {

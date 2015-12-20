@@ -51,6 +51,6 @@
 
     };
 
-    window.BixieFieldtypesMixin.components['email'] = module.exports;
+    window.BixieFieldtypes.components['email'] = module.exports;
 
 </script>
