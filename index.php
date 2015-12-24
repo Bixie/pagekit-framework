@@ -31,7 +31,7 @@ return [
 	'events' => [
 		'view.scripts' => function ($event, $scripts) use ($app) {
 			$scripts->register('framework-settings', 'bixie/framework:app/bundle/settings.js', '~extensions');
-			$scripts->register('bixie-framework', 'bixie/framework:app/bundle/bixie-framework.js');
+			$scripts->register('bixie-framework', 'bixie/framework:app/bundle/bixie-framework.js', ['vue']);
 			//register fields
 			$scripts->register('bixie-fieldtypes', 'bixie/framework:app/bundle/bixie-fieldtypes.js', ['vue', 'bixie-framework']);
 			foreach ($app->module('bixie/framework')->getFieldTypes() as $fieldType) {
