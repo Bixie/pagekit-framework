@@ -49,7 +49,8 @@
 	    //components
 	    Vue.component('input-category', __webpack_require__(3));
 	    Vue.component('input-tags', __webpack_require__(6));
-
+	    //directives
+	    Vue.directive('spinner', __webpack_require__(11));
 	    //fields
 	    Vue.field.templates.formrow = __webpack_require__(9);
 	    Vue.field.templates.raw = __webpack_require__(10);
@@ -376,6 +377,28 @@
 /***/ function(module, exports) {
 
 	module.exports = "<template v-for=\"field in fields\">\r\n    <field :config=\"field\" :values.sync=\"values\"></field>\r\n</template>\r\n";
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = {
+
+	    params: ['icon', 'spinner'],
+
+	    bind: function () {
+	        var base = this.el.className || 'uk-margin-small-right';
+	        this.iconClass = base + ' uk-icon-' + this.params.icon;
+	        this.spinningClass = base + ' uk-icon-spin uk-icon-' + (this.params.spinner || 'circle-o-notch');
+
+	    },
+
+	    update: function (value) {
+	        this.el.className = value ? this.spinningClass : this.iconClass;
+	    }
+
+	};
+
 
 /***/ }
 /******/ ]);

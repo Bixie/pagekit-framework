@@ -3,7 +3,8 @@ if (window.Vue) {
     //components
     Vue.component('input-category', require('./components/input-category.vue'));
     Vue.component('input-tags', require('./components/input-tags.vue'));
-
+    //directives
+    Vue.directive('spinner', require('./directives/spinner'));
     //fields
     Vue.field.templates.formrow = require('./templates/formrow.html');
     Vue.field.templates.raw = require('./templates/raw.html');
