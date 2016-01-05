@@ -50,10 +50,10 @@
 	    Vue.component('input-category', __webpack_require__(3));
 	    Vue.component('input-tags', __webpack_require__(6));
 	    //directives
-	    Vue.directive('spinner', __webpack_require__(11));
+	    Vue.directive('spinner', __webpack_require__(9));
 	    //fields
-	    Vue.field.templates.formrow = __webpack_require__(9);
-	    Vue.field.templates.raw = __webpack_require__(10);
+	    Vue.field.templates.formrow = __webpack_require__(10);
+	    Vue.field.templates.raw = __webpack_require__(11);
 	    Vue.field.types.text = '<input type="text" v-bind="attrs" v-model="value">';
 	    Vue.field.types.textarea = '<textarea v-bind="attrs" v-model="value"></textarea>';
 	    Vue.field.types.select = '<select v-bind="attrs" v-model="value"><option v-for="option in options" :value="option">{{ $key }}</option></select>';
@@ -370,18 +370,6 @@
 /* 9 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-for=\"field in fields\" :class=\"{'uk-form-row': !field.raw}\">\r\n    <label v-if=\"field.label\" class=\"uk-form-label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label | trans }}\r\n    </label>\r\n    <div v-if=\"!field.raw\" class=\"uk-form-controls\" :class=\"{'uk-form-controls-text': ['checkbox', 'radio'].indexOf(field.type)>-1}\">\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </div>\r\n    <field v-else :config=\"field\" :values.sync=\"values\"></field>\r\n</div>\r\n";
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	module.exports = "<template v-for=\"field in fields\">\r\n    <field :config=\"field\" :values.sync=\"values\"></field>\r\n</template>\r\n";
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
 	module.exports = {
 
 	    params: ['icon', 'spinner'],
@@ -399,6 +387,18 @@
 
 	};
 
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	module.exports = "<div v-for=\"field in fields\" :class=\"{'uk-form-row': !field.raw}\">\r\n    <label v-if=\"field.label\" class=\"uk-form-label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label | trans }}\r\n    </label>\r\n    <div v-if=\"!field.raw\" class=\"uk-form-controls\" :class=\"{'uk-form-controls-text': ['checkbox', 'radio'].indexOf(field.type)>-1}\">\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </div>\r\n    <field v-else :config=\"field\" :values.sync=\"values\"></field>\r\n</div>\r\n";
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "<template v-for=\"field in fields\">\r\n    <field :config=\"field\" :values.sync=\"values\"></field>\r\n</template>\r\n";
 
 /***/ }
 /******/ ]);
