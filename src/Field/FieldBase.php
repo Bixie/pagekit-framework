@@ -25,6 +25,14 @@ abstract class FieldBase implements FieldInterface {
 	 */
 	public $type;
 	/**
+	 * @var string
+	 */
+	public $slug;
+	/**
+	 * @var string
+	 */
+	public $label;
+	/**
 	 * @var array
 	 */
 	public $options = [];
@@ -94,5 +102,12 @@ abstract class FieldBase implements FieldInterface {
 	public function formatValue () {
 		return $this->getFieldType()->formatValue($this, $this->get('value', []));
 	}
+
+	/**
+	 * @param array $data
+	 * @param array $ignore
+	 * @return array
+	 */
+	public function toArray(array $data = [], array $ignore = []) {}
 
 }

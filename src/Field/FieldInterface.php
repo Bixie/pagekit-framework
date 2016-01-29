@@ -46,5 +46,11 @@ interface FieldInterface {
 	 */
 	public function formatValue ();
 
+	/**
+	 * @param array $data
+	 * @param array $ignore
+	 * @return array
+	 */
+	public function toArray(array $data = [], array $ignore = []);
 
 }
