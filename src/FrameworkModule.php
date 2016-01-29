@@ -36,7 +36,8 @@ class FrameworkModule extends Module {
 		//todo cache this
 		if (!$this->fieldTypes) {
 
-			$this->types = [];
+			$this->fieldTypes = [];
+			/** @noinspection PhpUnusedLocalVariableInspection */
 			$app = App::getInstance(); //available for index.php files
 			$paths = [];
 

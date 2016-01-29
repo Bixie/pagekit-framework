@@ -24,6 +24,7 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 
 	/**
 	 * Type constructor.
+	 * @param $type
 	 */
 	public function __construct ($type) {
 		$this->id = $type['id'];

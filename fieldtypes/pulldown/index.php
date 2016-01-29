@@ -1,5 +1,4 @@
 <?php
-/** @var Application $app */
 return [
 	'id' => 'pulldown',
 	'label' => __('Pulldown'),
