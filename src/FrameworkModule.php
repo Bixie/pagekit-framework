@@ -12,6 +12,8 @@ class FrameworkModule extends Module {
 	 */
 	protected $fieldTypes;
 
+	protected $fieldExtensions = ['bixie/formmaker', 'bixie/userprofile', 'bixie/customcontent'];
+
 	/**
 	 * {@inheritdoc}
 	 */
@@ -32,7 +34,7 @@ class FrameworkModule extends Module {
 	/**
 	 * @return array
 	 */
-	public function getFieldTypes () {
+	public function getFieldTypes ($extension = null) {
 		//todo cache this
 		if (!$this->fieldTypes) {
 
@@ -51,6 +53,7 @@ class FrameworkModule extends Module {
 				$package = array_merge ([
 					'id' => '',
 					'main' => '',
+					'extensions' => $this->fieldExtensions,
 					'class' => '\Bixie\Framework\FieldType\FieldType',
 					'resource' => 'bixie/framework:app/bundle',
 					'config' => [
@@ -68,6 +71,12 @@ class FrameworkModule extends Module {
 				$this->registerFieldType($package);
 			}
 
+		}
+		if ($extension) {
+			return array_filter($this->fieldTypes, function ($fieldType) use ($extension) {
+				/** @var FieldTypeBase $fieldType */
+			    return in_array($extension, $fieldType->getExtensions());
+			});
 		}
 
 		return $this->fieldTypes;

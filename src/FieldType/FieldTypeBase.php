@@ -61,6 +61,13 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getExtensions () {
+		return $this->type['extensions'];
+	}
+
+	/**
 	 * @param FieldBase $field
 	 * @return array
 	 */

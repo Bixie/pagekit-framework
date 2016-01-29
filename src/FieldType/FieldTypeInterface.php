@@ -12,6 +12,17 @@ interface FieldTypeInterface  {
 	public function getLabel ();
 
 	/**
+	 * @return array
+	 */
+	public function getExtensions ();
+
+	/**
+	 * @param FieldBase $field
+	 * @return array
+	 */
+	public function getOptions (FieldBase $field);
+
+	/**
 	 * @param FieldBase $field
 	 * @param array $value
 	 * @return array
