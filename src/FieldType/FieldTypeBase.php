@@ -73,6 +73,7 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 	}
 
 	/**
+	 * Prepare default value before displaying form
 	 * @param FieldBase $field
 	 * @param array $value
 	 * @return array
@@ -88,14 +89,12 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 
 	/**
 	 * @param FieldBase $field
-	 * @param array $value
+	 * @param array|string $value
 	 * @return array
 	 */
 	public function formatValue (FieldBase $field, $value) {
 		if (is_callable($this->type['formatValue'])) {
-
 			return call_user_func($this->type['formatValue'], $field, $value);
-
 		}
 
 		if (count($field->getOptions())) {

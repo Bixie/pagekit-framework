@@ -13,5 +13,8 @@ return [
 	'dependancies' => ['editor'],
 	'prepareValue' => function ($field, $value) {
 		return App::content()->applyPlugins($value, ['field' => $field, 'markdown' => $field->get('markdown')]);
+	},
+	'formatValue' => function ($field, $value) {
+		return App::content()->applyPlugins($value, ['field' => $field, 'markdown' => $field->get('markdown')]);
 	}
 ];
