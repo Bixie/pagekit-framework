@@ -129,11 +129,11 @@ var BixieFieldtypes =
 	                this.field.data.value = this.field.data.value || defaultValue;
 	                return this.field.data;
 	            }
-	            this.model[this.field.id].type = this.field.type;
-	            this.model[this.field.id].label = this.field.label;
-	            this.model[this.field.id].value = defaultValue;
-	            this.model[this.field.id].prepared = this.field.prepared;
-	            return this.model[this.field.id];
+	            this.model[this.field.slug].type = this.field.type;
+	            this.model[this.field.slug].label = this.field.label;
+	            this.model[this.field.slug].value = this.model[this.field.slug].data.value || defaultValue;
+	            this.model[this.field.slug].prepared = this.field.prepared;
+	            return this.model[this.field.slug];
 	        },
 	        fieldInvalid: function (form) {
 	            return form && form[this.fieldid] ? form[this.fieldid].invalid : false;
