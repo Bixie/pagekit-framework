@@ -6,7 +6,7 @@ use Pagekit\Application as App;
 use Bixie\Framework\Field\FieldBase;
 use Pagekit\System\Model\DataModelTrait;
 
-abstract class FieldValueBase implements FieldValueInterface{
+abstract class FieldValueBase implements FieldValueInterface {
 
 	use DataModelTrait;
 
@@ -50,7 +50,8 @@ abstract class FieldValueBase implements FieldValueInterface{
 			'slug' => $this->field->slug,
 			'type' => $this->getFieldType()->toArray(),
 			'label' => $this->field->label,
-			'value' => $this->formatValue()
+			'value' => $this->formatValue(),
+			'data' => $this->data
 		];
 	}
 
@@ -59,9 +60,8 @@ abstract class FieldValueBase implements FieldValueInterface{
 	 */
 	public function formatValue () {
 
-		$value = $this->getFieldType()->formatValue($this->field, $this->get('value'));
+		return $this->getFieldType()->formatValue($this->field, $this->get('value'));
 
-		return is_array($value) ? $value : [$value];
 	}
 
 }
