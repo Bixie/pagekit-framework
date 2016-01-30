@@ -1,13 +1,4 @@
 <?php
-/* *
- *	Bixie Printshop
- *  ItemBase.php
- *	Created on 13-12-2015 19:38
- *  
- *  @author Matthijs
- *  @copyright Copyright (C)2015 Bixie.nl
- *
- */
 
 
 namespace Bixie\Framework\Field;
