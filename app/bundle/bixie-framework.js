@@ -52,15 +52,8 @@
 	    //directives
 	    Vue.directive('spinner', __webpack_require__(9));
 	    //fields
-	    Vue.field.templates.formrow = __webpack_require__(10);
-	    Vue.field.templates.raw = __webpack_require__(11);
-	    Vue.field.types.text = '<input type="text" v-bind="attrs" v-model="value">';
-	    Vue.field.types.textarea = '<textarea v-bind="attrs" v-model="value"></textarea>';
-	    Vue.field.types.select = '<select v-bind="attrs" v-model="value"><option v-for="option in options" :value="option">{{ $key }}</option></select>';
-	    Vue.field.types.radio = '<p class="uk-form-controls-condensed"><label v-for="option in options"><input type="radio" :value="option" v-model="value"> {{ $key | trans }}</label></p>';
-	    Vue.field.types.checkbox = '<p class="uk-form-controls-condensed"><label><input type="checkbox" v-bind="attrs" v-model="value" v-bind:true-value="1" v-bind:false-value="0" number> {{ optionlabel | trans }}</label></p>';
-	    Vue.field.types.number = '<input type="number" v-bind="attrs" v-model="value" number>';
-	    Vue.field.types.title = '<h3 v-bind="attrs">{{ title | trans }}</h3>';
+	    __webpack_require__(10)(Vue);
+
 	}
 
 
@@ -277,47 +270,65 @@
 
 	// <template>
 
-	//     <div class="uk-flex uk-flex-wrap" data-uk-margin="">
+	//     <div>
 
-	//         <div v-for="tag in tags" class="uk-badge uk-margin-small-right">
+	//         <ul v-if="style == 'list'" class="uk-list uk-list-line">
 
-	//             <a class="uk-float-right uk-close" @click.prevent="removeTag(tag)"></a>
+	//             <li v-for="tag in tags">
 
-	//             {{ tag }}
+	//                 <a class="uk-float-right uk-close" @click.prevent="removeTag(tag)"></a>
 
-	//         </div>
+	//                 {{ tag }}
 
-	//     </div>
+	//             </li>
 
-	//     <div class="uk-flex uk-flex-middle uk-margin">
+	//         </ul>
 
-	//         <div>
+	//         <div v-else class="uk-flex uk-flex-wrap" data-uk-margin="">
 
-	//             <div class="uk-position-relative" data-uk-dropdown="">
+	//             <div v-for="tag in tags" class="uk-badge uk-margin-small-right" track-by="$index">
 
-	//                 <button type="button" class="uk-button uk-button-small">{{ 'Existing' | trans }}</button>
+	//                 <a class="uk-float-right uk-close" @click.prevent="removeTag(tag)"></a>
 
-	//                 <div class="uk-dropdown uk-dropdown-small">
-
-	//                     <ul class="uk-nav uk-nav-dropdown">
-
-	//                         <li v-for="tag in existing"><a @click.prevent="addTag(tag)">{{ tag }}</a></li>
-
-	//                     </ul>
-
-	//                 </div>
+	//                 {{ tag }}
 
 	//             </div>
 
 	//         </div>
 
-	//         <div class="uk-flex-item-1 uk-margin-small-left">
+	//         <div class="uk-flex uk-flex-middle uk-margin">
 
-	//             <div class="uk-form-password">
+	//             <div v-show="existing.length">
 
-	//                 <input type="text" class="uk-width-1-1" v-model="newtag">
+	//                 <div class="uk-position-relative" data-uk-dropdown="">
 
-	//                 <a class="uk-form-password-toggle" @click.prevent="addTag()"><i class="uk-icon-check uk-icon-hover"></i></a>
+	//                     <button type="button" class="uk-button uk-button-small">{{ 'Bestaande' }}</button>
+
+	//                     <div class="uk-dropdown uk-dropdown-small">
+
+	//                         <ul class="uk-nav uk-nav-dropdown">
+
+	//                             <li v-for="tag in existing"><a :class="{'uk-text-muted': selected(tag)}" @click.prevent="addTag(tag)">{{ tag }}</a></li>
+
+	//                         </ul>
+
+	//                     </div>
+
+	//                 </div>
+
+	//             </div>
+
+	//             <div class="uk-flex-item-1 uk-margin-small-left">
+
+	//                 <div class="uk-form-password">
+
+	//                     <input type="text" class="uk-width-1-1" v-model="newtag">
+
+	//                     <a class="uk-form-password-toggle" @click.prevent="addTag()"><i
+
+	//                             class="uk-icon-check uk-icon-hover"></i></a>
+
+	//                 </div>
 
 	//             </div>
 
@@ -331,7 +342,11 @@
 
 	module.exports = {
 
-	    props: ['tags', 'existing'],
+	    props: {
+	        'tags': Array,
+	        'existing': Array,
+	        'style': { type: String, default: 'tags' }
+	    },
 
 	    data: function data() {
 	        return {
@@ -342,16 +357,25 @@
 	    methods: {
 
 	        addTag: function addTag(tag) {
-	            if (!tag) return;
-	            this.tags.push(tag || this.newtag);
-	            this.$nextTick(function () {
-	                UIkit.$html.trigger('resize'); //todo why no check.display or changed.dom???
-	            });
+	            tag = tag || this.newtag;
+	            if (this.selected(tag)) {
+	                return;
+	            }
+	            this.tags.push(tag);
+	            if (this.style == 'tags') {
+	                this.$nextTick(function () {
+	                    UIkit.$html.trigger('resize'); //todo why no check.display or changed.dom???
+	                });
+	            }
 	            this.newtag = '';
 	        },
 
 	        removeTag: function removeTag(tag) {
 	            this.tags.$remove(tag);
+	        },
+
+	        selected: function selected(tag) {
+	            return this.tags.indexOf(tag) > -1;
 	        }
 
 	    }
@@ -364,7 +388,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"uk-flex uk-flex-wrap\" data-uk-margin=\"\">\r\n        <div v-for=\"tag in tags\" class=\"uk-badge uk-margin-small-right\">\r\n            <a class=\"uk-float-right uk-close\" @click.prevent=\"removeTag(tag)\"></a>\r\n            {{ tag }}\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"uk-flex uk-flex-middle uk-margin\">\r\n        <div>\r\n            <div class=\"uk-position-relative\" data-uk-dropdown=\"\">\r\n                <button type=\"button\" class=\"uk-button uk-button-small\">{{ 'Existing' | trans }}</button>\r\n\r\n                <div class=\"uk-dropdown uk-dropdown-small\">\r\n                    <ul class=\"uk-nav uk-nav-dropdown\">\r\n                        <li v-for=\"tag in existing\"><a @click.prevent=\"addTag(tag)\">{{ tag }}</a></li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n        <div class=\"uk-flex-item-1 uk-margin-small-left\">\r\n            <div class=\"uk-form-password\">\r\n                <input type=\"text\" class=\"uk-width-1-1\" v-model=\"newtag\">\r\n                <a class=\"uk-form-password-toggle\" @click.prevent=\"addTag()\"><i class=\"uk-icon-check uk-icon-hover\"></i></a>\r\n            </div>\r\n        </div>\r\n\r\n    </div>";
+	module.exports = "<div>\r\n        <ul v-if=\"style == 'list'\" class=\"uk-list uk-list-line\">\r\n            <li v-for=\"tag in tags\">\r\n                <a class=\"uk-float-right uk-close\" @click.prevent=\"removeTag(tag)\"></a>\r\n                {{ tag }}\r\n            </li>\r\n        </ul>\r\n        <div v-else class=\"uk-flex uk-flex-wrap\" data-uk-margin=\"\">\r\n            <div v-for=\"tag in tags\" class=\"uk-badge uk-margin-small-right\" track-by=\"$index\">\r\n                <a class=\"uk-float-right uk-close\" @click.prevent=\"removeTag(tag)\"></a>\r\n                {{ tag }}\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"uk-flex uk-flex-middle uk-margin\">\r\n            <div v-show=\"existing.length\">\r\n                <div class=\"uk-position-relative\" data-uk-dropdown=\"\">\r\n                    <button type=\"button\" class=\"uk-button uk-button-small\">{{ 'Bestaande' }}</button>\r\n\r\n                    <div class=\"uk-dropdown uk-dropdown-small\">\r\n                        <ul class=\"uk-nav uk-nav-dropdown\">\r\n                            <li v-for=\"tag in existing\"><a :class=\"{'uk-text-muted': selected(tag)}\" @click.prevent=\"addTag(tag)\">{{ tag }}</a></li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"uk-flex-item-1 uk-margin-small-left\">\r\n                <div class=\"uk-form-password\">\r\n                    <input type=\"text\" class=\"uk-width-1-1\" v-model=\"newtag\">\r\n                    <a class=\"uk-form-password-toggle\" @click.prevent=\"addTag()\"><i\r\n                            class=\"uk-icon-check uk-icon-hover\"></i></a>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n    </div>";
 
 /***/ },
 /* 9 */
@@ -390,15 +414,49 @@
 
 /***/ },
 /* 10 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div v-for=\"field in fields\" :class=\"{'uk-form-row': !field.raw}\">\r\n    <label v-if=\"field.label\" class=\"uk-form-label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label | trans }}\r\n    </label>\r\n    <div v-if=\"!field.raw\" class=\"uk-form-controls\" :class=\"{'uk-form-controls-text': ['checkbox', 'radio'].indexOf(field.type)>-1}\">\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </div>\r\n    <field v-else :config=\"field\" :values.sync=\"values\"></field>\r\n</div>\r\n";
+	module.exports = function (Vue) {
+
+	    Vue.field.templates.formrow = __webpack_require__(11);
+	    Vue.field.templates.raw = __webpack_require__(12);
+	    Vue.field.templates.descriptionlist = __webpack_require__(13);
+
+	    Vue.field.types.text = '<input type="text" v-bind="attrs" v-model="value">';
+	    Vue.field.types.textarea = '<textarea v-bind="attrs" v-model="value"></textarea>';
+	    Vue.field.types.select = '<select v-bind="attrs" v-model="value"><option v-for="option in options" :value="option">{{ $key }}</option></select>';
+	    Vue.field.types.radio = '<p class="uk-form-controls-condensed"><label v-for="option in options" v-bind="attrs"><input type="radio" :value="option" v-model="value"> {{ $key }}</label></p>';
+	    Vue.field.types.checkbox = '<p class="uk-form-controls-condensed"><label><input type="checkbox" v-bind="attrs" v-model="value" v-bind:true-value="1" v-bind:false-value="0" number> {{ optionlabel }}</label></p>';
+
+	    Vue.field.types.number = '<input type="number" v-bind="attrs" v-model="value" number>';
+	    Vue.field.types.title = '<h3 v-bind="attrs">{{ title }}</h3>';
+	    Vue.field.types.price = '<i class="uk-icon-euro uk-margin-small-right"></i><input type="number" v-bind="attrs" v-model="value" number>';
+	    Vue.field.types.multiselect = '<multiselect :values.sync="value" :options="options"></multiselect>';
+
+	    Vue.field.types.tags = '<input-tags v-bind="attrs" :tags.sync="value" :existing="options" :style="style || \'tags\'"></input-tags>';
+
+	    Vue.field.types.format = '<span v-bind="attrs">{{ value }}</span>';
+
+	};
+
 
 /***/ },
 /* 11 */
 /***/ function(module, exports) {
 
+	module.exports = "<div v-for=\"field in fields\" :class=\"{'uk-form-row': !field.raw}\">\r\n    <label v-if=\"field.label\" class=\"uk-form-label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label | trans }}\r\n    </label>\r\n    <div v-if=\"!field.raw\" class=\"uk-form-controls\" :class=\"{'uk-form-controls-text': ['checkbox', 'radio'].indexOf(field.type)>-1}\">\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </div>\r\n    <field v-else :config=\"field\" :values.sync=\"values\"></field>\r\n</div>\r\n";
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
 	module.exports = "<template v-for=\"field in fields\">\r\n    <field :config=\"field\" :values.sync=\"values\"></field>\r\n</template>\r\n";
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = "<template v-for=\"field in fields\">\r\n    <dt v-if=\"field.label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label }}\r\n    </dt>\r\n    <dd>\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </dd>\r\n</template>\r\n";
 
 /***/ }
 /******/ ]);
