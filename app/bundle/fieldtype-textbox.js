@@ -45,10 +45,10 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(27)
+	module.exports = __webpack_require__(28)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(28)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(29)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -63,7 +63,7 @@
 
 /***/ },
 
-/***/ 27:
+/***/ 28:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -161,7 +161,7 @@
 
 /***/ },
 
-/***/ 28:
+/***/ 29:
 /***/ function(module, exports) {
 
 	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <textarea v-if=\"minLength || maxLength\" class=\"uk-form-width-large\"\n                      placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                      :name=\"fieldid\"\n                      v-bind=\"{id: fieldid, rows: field.data.rows}\"\n                      v-model=\"dataObject.value\"\n                      v-validate:required=\"fieldRequired\"\n                      v-validate:minLength=\"minLength\"\n                      v-validate:maxLength=\"maxLength\"></textarea>\n\n            <textarea v-else class=\"uk-form-width-large\"\n                      placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                      v-bind=\"{name: fieldid, id: fieldid, rows: field.data.rows}\"\n                      v-model=\"dataObject.value\"\n                      v-validate:required=\"fieldRequired\"></textarea>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>";

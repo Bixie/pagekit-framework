@@ -45,10 +45,10 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(21)
+	module.exports = __webpack_require__(22)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(22)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(23)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -63,7 +63,7 @@
 
 /***/ },
 
-/***/ 21:
+/***/ 22:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -134,7 +134,7 @@
 
 /***/ },
 
-/***/ 22:
+/***/ 23:
 /***/ function(module, exports) {
 
 	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n\n            <select v-if=\"field.data.multiple\" class=\"uk-form-width-large\" multiple=\"multiple\"\n                    :name=\"fieldid\"\n                    v-bind=\"{id: fieldid, size:field.data.size > 1 ? field.data.size : false}\"\n                    v-model=\"dataObject.value\"\n                    v-validate:required=\"fieldRequired\">\n                <option v-for=\"option in field.options\" :value=\"option.value\">{{ option.text }}</option>\n            </select>\n\n            <select v-else class=\"uk-form-width-large\"\n                    :name=\"fieldid\"\n                    v-bind=\"{id: fieldid, size:field.data.size > 1 ? field.data.size : false}\"\n                    v-model=\"dataObject.value\"\n                    v-validate:required=\"fieldRequired\">\n                <option v-for=\"option in field.options\" :value=\"option.value\">{{ option.text }}</option>\n            </select>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please select a value' | trans }}</p>\n        </div>\n    </div>";

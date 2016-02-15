@@ -44,10 +44,10 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(16)
+	module.exports = __webpack_require__(17)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(20)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(21)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -76,7 +76,8 @@
 /* 13 */,
 /* 14 */,
 /* 15 */,
-/* 16 */
+/* 16 */,
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -97,7 +98,7 @@
 
 	    mixins: [BixieFieldtypeMixin],
 
-	    settings: __webpack_require__(17),
+	    settings: __webpack_require__(18),
 
 	    appearance: {},
 
@@ -119,13 +120,13 @@
 	// </script>
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(18)
+	module.exports = __webpack_require__(19)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(19)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(20)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -139,7 +140,7 @@
 	})()}
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -175,13 +176,13 @@
 	// </script>
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"uk-form-row\">\r\n\r\n        <v-editor :value.sync=\"field.data.value\" :options=\"{markdown : field.data.markdown}\"></v-editor>\r\n        <p>\r\n            <label><input type=\"checkbox\" v-model=\"field.data.markdown\"> {{ 'Enable Markdown' | trans }}</label>\r\n        </p>\r\n\r\n    </div>";
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	module.exports = "<div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n\n        {{{ dataObject.prepared }}}\n\n    </div>";
