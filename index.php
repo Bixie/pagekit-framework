@@ -22,6 +22,14 @@ return [
 
 	],
 
+	'permissions' => [
+
+		'bixframework: upload files' => [
+			'title' => 'Upload files'
+		]
+
+	],
+
 	'settings' => 'settings-bixframework',
 
 	'config' => [

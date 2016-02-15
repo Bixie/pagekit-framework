@@ -18,7 +18,7 @@ class FrameworkModule extends Module {
 	 * {@inheritdoc}
 	 */
 	public function main (App $app) {
-
+		$app['filter']->register('filesize', 'Bixie\Framework\Filter\FileSizeFilter');
 	}
 
 	/**
@@ -52,6 +52,7 @@ class FrameworkModule extends Module {
 			foreach ($paths as $p) {
 				$package = array_merge ([
 					'id' => '',
+					'path' => dirname($p),
 					'main' => '',
 					'extensions' => $this->fieldExtensions,
 					'class' => '\Bixie\Framework\FieldType\FieldType',
@@ -86,8 +87,32 @@ class FrameworkModule extends Module {
 	 * Register a field type.
 	 * @param array $package
 	 */
-	public function registerFieldType ($package) {
+	protected function registerFieldType ($package) {
+		$loader = App::get('autoloader');
+		if (isset($package['autoload'])) {
+			foreach ($package['autoload'] as $namespace => $path) {
+				$loader->addPsr4($namespace, $this->resolvePath($package, $path));
+			}
+		}
 		$this->fieldTypes[$package['id']] = new $package['class']($package);
+	}
+
+	/**
+	 * Resolves a path to a absolute module path.
+	 *
+	 * @param  array  $package
+	 * @param  string $path
+	 * @return string
+	 */
+	protected function resolvePath($package, $path) {
+
+		$path = strtr($path, '\\', '/');
+
+		if (!($path[0] == '/' || (strlen($path) > 3 && ctype_alpha($path[0]) && $path[1] == ':' && $path[2] == '/'))) {
+			$path = $package['path']."/$path";
+		}
+
+		return $path;
 	}
 
 }
