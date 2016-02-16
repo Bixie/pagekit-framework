@@ -93,13 +93,14 @@
 
 	//             <div v-show="allowedUploads" class="uk-placeholder">
 	//                 <i class="uk-icon-cloud-upload uk-margin-small-right"></i>
-	//                 {{ 'Please drop a file here or ' | trans }}<a class="uk-form-file">{{ 'select a file' | trans }}<input type="file" name="files[]" multiple="multiple"></a>.
+	//                 {{ 'Please drop a file here or ' | trans }}<a class="uk-form-file">{{ 'select a file' | trans }}<input
+	//                     type="file" name="files[]" multiple="multiple"></a>.
 	//             </div>
 
 	//             <div class="uk-progress uk-progress-mini uk-margin-remove" v-show="upload.running">
 	//                 <div class="uk-progress-bar" :style="{width: upload.progress + '%'}"></div>
 	//             </div>
-	//     </div>
+	//         </div>
 
 	//     </div>
 
@@ -189,10 +190,6 @@
 
 	    events: {
 
-	        /**
-	         * Init upload
-	         */
-
 	        'hook:ready': function hookReady() {
 
 	            var uploader = this,
@@ -280,7 +277,7 @@
 /***/ 31:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n\n            <div v-if=\"message.message\" class=\"uk-alert\" :class=\"message.msg_class\">{{ message.message }}</div>\n\n            <ul class=\"uk-list uk-list-striped\" v-if=\"dataObject.value.length\">\n                <li v-for=\"file in dataObject.value\" class=\"uk-flex uk-flex-middle\">\n                    <div class=\"uk-flex-item-1 uk-margin-left\">\n                        <h4 class=\"uk-margin-remove\">\n                            <a :href=\"$url(file.url)\" download><i class=\"uk-icon-file-o uk-margin-small-right\"></i>{{ file.name }}</a>\n                        </h4>\n                        <small>{{ file.size | fileSize }}</small>\n                    </div>\n                    <div v-if=\"isImage(file.url)\" class=\"uk-margin-left\">\n                        <img :src=\"file.url\" :alt=\"file.name\" style=\"max-height: 100px\"/>\n                    </div>\n                </li>\n            </ul>\n\n            <div v-show=\"allowedUploads\" class=\"uk-placeholder\">\n                <i class=\"uk-icon-cloud-upload uk-margin-small-right\"></i>\n                {{ 'Please drop a file here or ' | trans }}<a class=\"uk-form-file\">{{ 'select a file' | trans }}<input type=\"file\" name=\"files[]\" multiple=\"multiple\"></a>.\n            </div>\n\n            <div class=\"uk-progress uk-progress-mini uk-margin-remove\" v-show=\"upload.running\">\n                <div class=\"uk-progress-bar\" :style=\"{width: upload.progress + '%'}\"></div>\n            </div>\n    </div>\n\n    </div>";
+	module.exports = "<div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n\n            <div v-if=\"message.message\" class=\"uk-alert\" :class=\"message.msg_class\">{{ message.message }}</div>\n\n            <ul class=\"uk-list uk-list-striped\" v-if=\"dataObject.value.length\">\n                <li v-for=\"file in dataObject.value\" class=\"uk-flex uk-flex-middle\">\n                    <div class=\"uk-flex-item-1 uk-margin-left\">\n                        <h4 class=\"uk-margin-remove\">\n                            <a :href=\"$url(file.url)\" download><i class=\"uk-icon-file-o uk-margin-small-right\"></i>{{ file.name }}</a>\n                        </h4>\n                        <small>{{ file.size | fileSize }}</small>\n                    </div>\n                    <div v-if=\"isImage(file.url)\" class=\"uk-margin-left\">\n                        <img :src=\"file.url\" :alt=\"file.name\" style=\"max-height: 100px\"/>\n                    </div>\n                </li>\n            </ul>\n\n            <div v-show=\"allowedUploads\" class=\"uk-placeholder\">\n                <i class=\"uk-icon-cloud-upload uk-margin-small-right\"></i>\n                {{ 'Please drop a file here or ' | trans }}<a class=\"uk-form-file\">{{ 'select a file' | trans }}<input\n                    type=\"file\" name=\"files[]\" multiple=\"multiple\"></a>.\n            </div>\n\n            <div class=\"uk-progress uk-progress-mini uk-margin-remove\" v-show=\"upload.running\">\n                <div class=\"uk-progress-bar\" :style=\"{width: upload.progress + '%'}\"></div>\n            </div>\n        </div>\n\n    </div>";
 
 /***/ }
 
