@@ -23,13 +23,14 @@
 
             <div v-show="allowedUploads" class="uk-placeholder">
                 <i class="uk-icon-cloud-upload uk-margin-small-right"></i>
-                {{ 'Please drop a file here or ' | trans }}<a class="uk-form-file">{{ 'select a file' | trans }}<input type="file" name="files[]" multiple="multiple"></a>.
+                {{ 'Please drop a file here or ' | trans }}<a class="uk-form-file">{{ 'select a file' | trans }}<input
+                    type="file" name="files[]" multiple="multiple"></a>.
             </div>
 
             <div class="uk-progress uk-progress-mini uk-margin-remove" v-show="upload.running">
                 <div class="uk-progress-bar" :style="{width: upload.progress + '%'}"></div>
             </div>
-    </div>
+        </div>
 
     </div>
 
@@ -119,10 +120,6 @@
 
         events: {
 
-            /**
-             * Init upload
-             */
-
             'hook:ready': function () {
 
                 var uploader = this, uploadedfiles = uploader.dataObject.value.length,
@@ -146,7 +143,9 @@
                                 }
 
                                 if (uploader.field.data.max_size > 0) {
-                                    if (_.filter(files, function (file) {return file.size > (uploader.field.data.max_size * 1024 * 1024)}).length) {
+                                    if (_.filter(files, function (file) {
+                                                return file.size > (uploader.field.data.max_size * 1024 * 1024);
+                                            }).length) {
                                         uploader.setMessage(uploader.$trans('File is too large.'));
                                         return false;
                                     }
