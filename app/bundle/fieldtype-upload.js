@@ -217,10 +217,10 @@
 	                    }
 
 	                    if (uploader.field.data.max_size > 0) {
-	                        uploader.setMessage(uploader.$trans('File is too large.'));
 	                        if (_.filter(files, function (file) {
 	                            return file.size > uploader.field.data.max_size * 1024 * 1024;
 	                        }).length) {
+	                            uploader.setMessage(uploader.$trans('File is too large.'));
 	                            return false;
 	                        }
 	                    }
