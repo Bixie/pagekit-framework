@@ -64,7 +64,8 @@ class UploadFieldType extends FieldTypeBase {
 					return $this->error(__('File is too large.'));
 				}
 				//give file unique name
-				$localFile = $file->move($path, sprintf('%s-%s', md5(time().$file->getClientOriginalName()), $file->getClientOriginalName()));
+				$localFile = $file->move($path, sprintf('%d%d-%s',
+					(microtime(true) * 10000), rand(), preg_replace("/[^a-zA-Z0-9\.]/", "-", $file->getClientOriginalName())));
 
 				$fileInfo[] = [
 					'name' => $file->getClientOriginalName(),
