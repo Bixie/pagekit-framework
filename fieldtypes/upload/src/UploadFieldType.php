@@ -21,7 +21,7 @@ class UploadFieldType extends FieldTypeBase {
 	public function formatValue (FieldBase $field, $value) {
 		return array_map(function ($file) {
 			return sprintf('<a href="%s" download>%s</a> <small>(%s)</small>',
-				$file['url'],
+				App::request()->getSchemeAndHttpHost() . $file['url'],
 				$file['name'],
 				App::filter($file['size'], 'filesize')
 			);
