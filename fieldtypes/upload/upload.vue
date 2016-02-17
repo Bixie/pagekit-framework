@@ -122,7 +122,7 @@
 
             'hook:ready': function () {
 
-                var uploader = this, uploadedfiles = uploader.dataObject.value.length,
+                var uploader = this,
                         settings = {
 
                             action: this.$url.route('api/formmaker/submission/ajax'),
