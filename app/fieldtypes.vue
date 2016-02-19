@@ -13,7 +13,7 @@
 
 <script>
 
-    window.BixieFieldtypeMixin = require('./mixins/fieldtype.js');
+    window.BixieFieldtypeMixin = require('./mixins/fieldtype');
     window.BixieFieldtypes = module.exports = {
 
         props: {

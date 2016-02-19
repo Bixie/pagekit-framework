@@ -7,8 +7,8 @@
 
             <div v-if="message.message" class="uk-alert" :class="message.msg_class">{{ message.message }}</div>
 
-            <ul class="uk-list uk-list-striped" v-if="dataObject.value.length">
-                <li v-for="file in dataObject.value" class="uk-flex uk-flex-middle">
+            <ul class="uk-list uk-list-striped" v-if="fieldValue.value.length">
+                <li v-for="file in valuedata" class="uk-flex uk-flex-middle">
                     <div class="uk-flex-item-1 uk-margin-left">
                         <h4 class="uk-margin-remove">
                             <a :href="$url(file.url)" download><i class="uk-icon-file-o uk-margin-small-right"></i>{{ file.name }}</a>
@@ -16,7 +16,7 @@
                         <small>{{ file.size | fileSize }}</small>
                     </div>
                     <div v-if="isImage(file.url)" class="uk-margin-left">
-                        <img :src="file.url" :alt="file.name" style="max-height: 100px"/>
+                        <img :src="$url(file.url)" :alt="file.name" style="max-height: 100px"/>
                     </div>
                 </li>
             </ul>
@@ -71,11 +71,10 @@
 
         data: function () {
             return {
+                action: window.$fieldtypes.ajax_url,
                 path: 'uploads',
                 upload: {},
                 selected: [],
-                dataObject: {},
-                fileCount: 0,
                 message: {
                     message: '',
                     msg_class: ''
@@ -85,14 +84,13 @@
         },
 
         created: function () {
-            this.$set('dataObject', this.getDataObject(this.field.data.value || []));
             if (this.field.data.path) this.$set('path', this.field.data.path);
         },
 
         computed: {
             allowedUploads: function () {
                 if (this.field.data.max_files >= 1) {
-                    return this.field.data.max_files - this.dataObject.value.length;
+                    return this.field.data.max_files - this.fieldValue.value.length;
                 }
                 return true;
             }
@@ -125,7 +123,7 @@
                 var uploader = this,
                         settings = {
 
-                            action: this.$url.route('api/formmaker/submission/ajax'),
+                            action: this.$url.route(uploader.action),
 
                             single: false,
 
@@ -176,7 +174,9 @@
                                 uploader.setMessage(data.message, data.error ? 'danger' : 'success');
 
                                 if (data.files) {
-                                    uploader.$set('dataObject.value', uploader.dataObject.value.concat(data.files));
+                                    data.files.forEach(function (file) {
+                                        uploader.addValue(file.name, file);
+                                    });
                                     uploader.$dispatch('upload.success');
                                 }
 

@@ -4,7 +4,7 @@
 namespace Bixie\Framework\FieldType\Upload;
 
 use Bixie\Framework\Field\FieldBase;
-use Bixie\Framework\FieldValue\FieldValue;
+use Bixie\Framework\FieldValue\FieldValueBase;
 use Pagekit\Application as App;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -14,25 +14,26 @@ class UploadFieldType extends FieldTypeBase {
 
 	/**
 	 * @param FieldBase    $field
-	 * @param array|string $value
+	 * @param FieldValueBase $fieldValue
 	 * @return array
 	 */
-	public function formatValue (FieldBase $field, $value) {
+	public function formatValue (FieldBase $field, FieldValueBase $fieldValue) {
 		return array_map(function ($file) {
+			if (!isset($file['url'])) return '';
 			return sprintf('<a href="%s" download>%s</a> <small>(%s)</small>',
-				$file['url'],
+				App::url($file['url']),
 				$file['name'],
 				App::filter($file['size'], 'filesize')
 			);
-		}, $value);
+		}, $fieldValue->getValuedata());
 	}
 
 
 	/**
-	 * @param FieldValue $fieldValue
+	 * @param FieldValueBase $fieldValue
 	 * @return array
 	 */
-	public function uploadAction ($fieldValue) {
+	public function uploadAction (FieldValueBase $fieldValue) {
 		try {
 
 			if (!$path = $this->getPath($fieldValue->field->get('path'))) {

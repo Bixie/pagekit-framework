@@ -10,5 +10,10 @@ return [
 		'maxLength' => 0,
 		'rows' => 0,
 		'placeholder' => ''
-	]
+	],
+	'formatValue' => function (\Bixie\Framework\Field\FieldBase $field, \Bixie\Framework\FieldValue\FieldValueBase $fieldValue) {
+		return array_map(function ($val) {
+			return nl2br($val);
+		}, $fieldValue->getValue());
+	}
 ];

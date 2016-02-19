@@ -2,7 +2,7 @@
 
     <div :class="classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)">
 
-        {{{ dataObject.prepared }}}
+        {{{ fieldValue.formatted[0] }}}
 
     </div>
 
@@ -20,13 +20,8 @@
 
         data: function () {
             return {
-                dataObject: {},
                 fieldid: _.uniqueId('formmakerfield_')
             };
-        },
-
-        created: function () {
-            this.$set('dataObject', this.getDataObject(this.field.data.value || ''));
         }
 
     };

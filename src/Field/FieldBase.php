@@ -3,8 +3,10 @@
 
 namespace Bixie\Framework\Field;
 
+use Bixie\Framework\FieldValue\FieldValue;
 use Pagekit\Application as App;
 use Bixie\Framework\FieldType\FieldTypeBase;
+use Bixie\Framework\FieldValue\FieldValueBase;
 use Pagekit\System\Model\DataModelTrait;
 
 abstract class FieldBase implements FieldInterface {
@@ -34,6 +36,11 @@ abstract class FieldBase implements FieldInterface {
 	protected $fieldType;
 
 	/**
+	 * @var FieldValueBase
+	 */
+	protected $fieldValue;
+
+	/**
 	 * @param string $type
 	 */
 	public function setFieldType ($type) {
@@ -48,6 +55,17 @@ abstract class FieldBase implements FieldInterface {
 			$this->fieldType = App::module('bixie/framework')->getFieldType($this->type);
 		}
 		return $this->fieldType;
+	}
+
+	/**
+	 * default value for field
+	 * @return FieldValueBase
+	 */
+	public function getFieldValue () {
+		if (!isset($this->fieldValue)) {
+			$this->fieldValue = new FieldValue($this, $this->get('value', []), $this->get('data', []));
+		}
+		return $this->fieldValue;
 	}
 
 	/**
@@ -79,11 +97,20 @@ abstract class FieldBase implements FieldInterface {
 	}
 
 	/**
-	 * Prepare default value before displaying form
+	 * get raw value
 	 * @return array
 	 */
-	public function prepareValue () {
-		return $this->getFieldType()->prepareValue($this, $this->get('value', []));
+	public function getValue () {
+		return $this->getFieldValue()->getValue();
+	}
+
+	/**
+	 * Prepare value before rendering
+	 * @param null $value
+	 * @return array
+	 */
+	public function getValuedata ($value = null) {
+		return $this->getFieldValue()->getValuedata($value);
 	}
 
 	/**
@@ -91,14 +118,26 @@ abstract class FieldBase implements FieldInterface {
 	 * @return array
 	 */
 	public function formatValue () {
-		return $this->getFieldType()->formatValue($this, $this->get('value', []));
+		return $this->getFieldType()->formatValue($this, $this->getFieldValue());
 	}
 
 	/**
+	 * Mostly overridden by ModelTrait toArray
 	 * @param array $data
 	 * @param array $ignore
 	 * @return array
 	 */
-	public function toArray(array $data = [], array $ignore = []) {}
+	public function toArray(array $data = [], array $ignore = []) {
+		return array_merge(array_diff_key([
+			'type' => $this->type,
+			'label' => $this->label,
+			'slug' => $this->slug,
+			'options' => $this->getOptions(),
+			'value' => $this->getFieldValue()->getValue(),
+			'valuedata' => $this->getFieldValue()->getValuedata(),
+			'formatted' => $this->formatValue(),
+			'data' => $this->data
+		], array_flip($ignore)), $data);
+	}
 
 }

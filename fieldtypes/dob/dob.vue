@@ -82,7 +82,6 @@
 
         data: function () {
             return {
-                dataObject: {},
                 fieldid: _.uniqueId('profilefield_'),
                 dobDate: false,
                 day: '',
@@ -92,10 +91,9 @@
         },
 
         created: function () {
-            this.$set('dataObject', this.getDataObject(this.field.data.value || ''));
             //value dob
-            if (this.dataObject.value) {
-                this.setDate(this.dataObject.value);
+            if (this.fieldValue.value.length) {
+                this.setDate(this.fieldValue.value[0]);
             } else {
                 this.dobDate = UIkit.Utils.moment();
             }
@@ -148,9 +146,9 @@
             },
             updateDate: function () {
                 if (this.day && this.month && this.year) {
-                    this.dataObject.value = this.dobDate.format('YYYY-MM-DD');
+                    this.fieldValue.value = [this.dobDate.format('YYYY-MM-DD')];
                 } else {
-                    this.dataObject.value = '';
+                    this.fieldValue.value = [];
                 }
             }
         },

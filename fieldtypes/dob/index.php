@@ -12,11 +12,12 @@ return [
 	],
 	'dependancies' => ['uikit-form-select', 'uikit-datepicker'],
 	'styles' => ['uikit-form-select' => 'app/assets/uikit/css/components/form-select.css'],
-	'formatValue' => function ($field, $value) {
+	'formatValue' => function (\Bixie\Framework\Field\FieldBase $field, \Bixie\Framework\FieldValue\FieldValueBase $fieldValue) {
 		$formats = ['DD-MM-YYYY' => 'F, m Y', 'MM-DD-YYYY' => 'm F Y'];
+		$value = $fieldValue->getValue();
 		try {
 
-			$date = new DateTime($value);
+			$date = new DateTime(reset($value));
 
 			return [$date->format($formats[$field->get('dateFormat', 'MM-DD-YYYY')])];
 

@@ -8,7 +8,7 @@
             <select v-if="field.data.multiple" class="uk-form-width-large" multiple="multiple"
                     :name="fieldid"
                     v-bind="{id: fieldid, size:field.data.size > 1 ? field.data.size : false}"
-                    v-model="dataObject.value"
+                    v-model="inputValue"
                     v-validate:required="fieldRequired">
                 <option v-for="option in field.options" :value="option.value">{{ option.text }}</option>
             </select>
@@ -16,7 +16,7 @@
             <select v-else class="uk-form-width-large"
                     :name="fieldid"
                     v-bind="{id: fieldid, size:field.data.size > 1 ? field.data.size : false}"
-                    v-model="dataObject.value"
+                    v-model="inputValue"
                     v-validate:required="fieldRequired">
                 <option v-for="option in field.options" :value="option.value">{{ option.text }}</option>
             </select>
@@ -46,14 +46,8 @@
 
         data: function () {
             return {
-                dataObject: {},
                 fieldid: _.uniqueId('formmakerfield_')
             };
-        },
-
-        created: function () {
-            var defaultValue = this.field.data.multiple ? [] : this.field.options.length ? this.field.options[0].value : '';
-            this.$set('dataObject', this.getDataObject(this.field.data.value || defaultValue));
         }
 
     };

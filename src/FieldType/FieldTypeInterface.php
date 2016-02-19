@@ -3,6 +3,7 @@
 namespace Bixie\Framework\FieldType;
 
 use Bixie\Framework\Field\FieldBase;
+use Bixie\Framework\FieldValue\FieldValueBase;
 
 interface FieldTypeInterface  {
 
@@ -24,17 +25,17 @@ interface FieldTypeInterface  {
 
 	/**
 	 * @param FieldBase $field
-	 * @param array $value
+	 * @param FieldValueBase $fieldValue
 	 * @return array
 	 */
-	public function prepareValue (FieldBase $field, $value);
+	public function prepareValue (FieldBase $field, FieldValueBase $fieldValue);
 
 	/**
 	 * @param FieldBase $field
-	 * @param array $value
+	 * @param FieldValueBase $fieldValue
 	 * @return array
 	 */
-	public function formatValue (FieldBase $field, $value);
+	public function formatValue (FieldBase $field, FieldValueBase $fieldValue);
 
 	/**
 	 * @param \Pagekit\View\Asset\AssetManager $scripts

@@ -4,6 +4,7 @@
 namespace Bixie\Framework\FieldType;
 
 use Bixie\Framework\Field\FieldBase;
+use Bixie\Framework\FieldValue\FieldValueBase;
 use Pagekit\Util\Arr;
 
 abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonSerializable {
@@ -83,42 +84,41 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 	/**
 	 * Prepare default value before displaying form
 	 * @param FieldBase $field
-	 * @param array $value
+	 * @param FieldValueBase $fieldValue
 	 * @return array
 	 */
-	public function prepareValue (FieldBase $field, $value) {
+	public function prepareValue (FieldBase $field, FieldValueBase $fieldValue) {
 		if (is_callable($this->type['prepareValue'])) {
 
-			return call_user_func($this->type['prepareValue'], $field, $value);
+			return call_user_func($this->type['prepareValue'], $field, $fieldValue);
 
 		}
-		return $value;
+		return $fieldValue->getValue();
 	}
 
 	/**
 	 * @param FieldBase $field
-	 * @param array|string $value
+	 * @param FieldValueBase $fieldValue
 	 * @return array
 	 */
-	public function formatValue (FieldBase $field, $value) {
+	public function formatValue (FieldBase $field, FieldValueBase $fieldValue) {
 		if (is_callable($this->type['formatValue'])) {
-			return call_user_func($this->type['formatValue'], $field, $value);
+			return call_user_func($this->type['formatValue'], $field, $fieldValue);
 		}
-
+		$value = $fieldValue->getValue();
 		if (count($field->getOptions())) {
 			//return from selectoptions
 			$options = $field->getOptionsRef();
-			if (is_array($value) && count($value)) {
+			if (count($value)) {
 				return array_map(function ($val) use ($options) {
 					return isset($options[$val]) ? $options[$val] : $val;
 				}, $value);
-			} else {
-				return $value ? isset($options[$value]) ? [$options[$value]] : [$value] : ['-'];
 			}
+			return ['-'];
 
 		} else {
 			//check for empty and return array
-			return is_array($value) ? count($value) ? $value : ['-'] : [$value ?: '-'];
+			return count($value) ? $value : ['-'];
 		}
 	}
 

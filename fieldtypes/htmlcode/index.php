@@ -11,10 +11,9 @@ return [
 		'markdown' => ''
 	],
 	'dependancies' => ['editor'],
-	'prepareValue' => function ($field, $value) {
-		return App::content()->applyPlugins($value, ['field' => $field, 'markdown' => $field->get('markdown')]);
-	},
-	'formatValue' => function ($field, $value) {
-		return App::content()->applyPlugins($value, ['field' => $field, 'markdown' => $field->get('markdown')]);
+	'formatValue' => function (\Bixie\Framework\Field\FieldBase $field, \Bixie\Framework\FieldValue\FieldValueBase $fieldValue) {
+		return array_map(function ($val) use ($field) {
+			return App::content()->applyPlugins($val, ['field' => $field, 'markdown' => $field->get('markdown')]);
+		}, $fieldValue->getValue());
 	}
 ];

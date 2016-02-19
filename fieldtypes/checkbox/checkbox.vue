@@ -6,7 +6,7 @@
         <div class="uk-form-controls uk-form-controls-text">
             <p v-for="option in field.options" class="uk-form-controls-condensed">
                 <label><input type="checkbox" value="{{ option.value }}"
-                              v-model="dataObject.value"> {{ option.text }}</label>
+                              v-model="inputValue"> {{ option.text }}</label>
             </p>
             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
                 'Please select a value' | trans }}</p>
@@ -27,13 +27,8 @@
 
         data: function () {
             return {
-                dataObject: {},
                 fieldid: _.uniqueId('bixiefieldtype_')
             };
-        },
-
-        created: function () {
-            this.$set('dataObject', this.getDataObject(this.field.data.value || []));
         }
 
     };

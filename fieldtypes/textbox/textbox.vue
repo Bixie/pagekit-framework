@@ -8,7 +8,7 @@
                       placeholder="{{ field.data.placeholder || '' | trans }}"
                       :name="fieldid"
                       v-bind="{id: fieldid, rows: field.data.rows}"
-                      v-model="dataObject.value"
+                      v-model="inputValue"
                       v-validate:required="fieldRequired"
                       v-validate:minLength="minLength"
                       v-validate:maxLength="maxLength"></textarea>
@@ -16,7 +16,7 @@
             <textarea v-else class="uk-form-width-large"
                       placeholder="{{ field.data.placeholder || '' | trans }}"
                       v-bind="{name: fieldid, id: fieldid, rows: field.data.rows}"
-                      v-model="dataObject.value"
+                      v-model="inputValue"
                       v-validate:required="fieldRequired"></textarea>
 
             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
@@ -61,13 +61,11 @@
 
         data: function () {
             return {
-                dataObject: {},
                 fieldid: _.uniqueId('formmakerfield_')
             };
         },
 
         created: function () {
-            this.$set('dataObject', this.getDataObject(this.field.data.value || ''));
             //defaults admin
             this.field.data.rows = this.field.data.rows || 4;
             this.field.data.minLength = this.field.data.minLength || 0;

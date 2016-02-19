@@ -35,12 +35,6 @@ interface FieldInterface {
 	public function getOptionsRef ();
 
 	/**
-	 * Prepare default value before displaying form
-	 * @return array
-	 */
-	public function prepareValue ();
-
-	/**
 	 * Prepare value before rendering
 	 * @return array
 	 */

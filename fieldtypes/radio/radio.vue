@@ -6,7 +6,7 @@
         <div class="uk-form-controls uk-form-controls-text">
             <p v-for="option in field.options" class="uk-form-controls-condensed">
                 <label><input type="radio" value="{{ option.value }}"
-                              v-model="dataObject.value"> {{ option.text }}</label>
+                              v-model="inputValue"> {{ option.text }}</label>
             </p>
         </div>
     </div>
@@ -25,13 +25,8 @@
 
         data: function () {
             return {
-                dataObject: {},
                 fieldid: _.uniqueId('formmakerfield_')
             };
-        },
-
-        created: function () {
-            this.$set('dataObject', this.getDataObject(this.field.data.value || []));
         }
 
     };

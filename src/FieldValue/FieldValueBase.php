@@ -11,6 +11,16 @@ abstract class FieldValueBase implements FieldValueInterface {
 	use DataModelTrait;
 
 	/**
+	 * @var array simple_array
+	 */
+	public $value = [];
+
+	/**
+	 * @var array
+	 */
+	protected $valuedata;
+
+	/**
 	 * @var FieldBase
 	 */
 	public $field;
@@ -23,12 +33,12 @@ abstract class FieldValueBase implements FieldValueInterface {
 	/**
 	 * Fieldsubmission constructor.
 	 * @param FieldBase $field
-	 * @param array $data
+	 * @return FieldValueBase
 	 */
-	public function __construct (FieldBase $field, $data) {
+	public function setField (FieldBase $field) {
 		$this->field = $field;
-		$this->data = $data;
 		$this->fieldType = App::module('bixie/framework')->getFieldType($field->type);
+		return $this;
 	}
 
 	/**
@@ -44,23 +54,65 @@ abstract class FieldValueBase implements FieldValueInterface {
 	/**
 	 * @return array
 	 */
-	public function toFormattedArray () {
-		return [
-			'field' => $this->field->toArray(),
-			'slug' => $this->field->slug,
-			'type' => $this->getFieldType()->toArray(),
-			'label' => $this->field->label,
-			'value' => $this->formatValue(),
-			'data' => $this->data
-		];
+	public function getValue () {
+		return $this->value ? : [];
 	}
 
 	/**
+	 * @param mixed $value
+	 * @return FieldValueBase
+	 */
+	public function setValue ($value) {
+		$this->value = is_array($value) ? $value : (!empty($value) ? [$value] : []);
+		return $this;
+	}
+
+	/**
+	 * @param null $value
 	 * @return array
+	 */
+	public function getValuedata ($value = null) {
+		if (!isset($this->valuedata)) {
+			$this->valuedata = [];
+			foreach ($this->value as $i => $val) {
+				$valueKey = 'data' . $i;
+				$this->valuedata[$valueKey] = array_merge(['value' => $val], $this->get($valueKey, []));
+			}
+		}
+		if ($value) {
+			foreach ($this->valuedata as $data) {
+				if ($data['value'] == $value) {
+					return $data;
+				}
+			}
+			return ['value' => $value];
+		}
+		return $this->valuedata;
+	}
+
+	/**
+	 * @param array $data
+	 * @param array $ignore
+	 * @return array data for javascript exports
+	 */
+	public function toFormattedArray (array $data = [], array $ignore = []) {
+		return array_merge(array_diff_key([
+			'field' => $this->field->toArray([], ['fieldValue', 'fieldType']),
+			'slug' => $this->field->slug,
+			'type' => $this->getFieldType()->toArray(),
+			'label' => $this->field->label,
+			'value' => $this->getValue(),
+			'formatted' => $this->formatValue(),
+			'data' => $this->getValuedata()
+		], array_flip($ignore)), $data);
+	}
+
+	/**
+	 * @return array of formatted value(s)
 	 */
 	public function formatValue () {
 
-		return $this->getFieldType()->formatValue($this->field, $this->get('value'));
+		return $this->getFieldType()->formatValue($this->field, $this);
 
 	}
 
