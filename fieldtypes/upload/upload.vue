@@ -10,6 +10,10 @@
             <ul class="uk-list uk-list-striped" v-if="fieldValue.value.length">
                 <li v-for="file in valuedata" class="uk-flex uk-flex-middle">
                     <div class="uk-flex-item-1 uk-margin-left">
+
+                        <a class="uk-icon-hover uk-icon-trash-o uk-float-right uk-margin-small-top uk-margin-small-right"
+                           @click="removeValue(file.value)" :title="'Remove file' | trans"></a>
+
                         <h4 class="uk-margin-remove">
                             <a :href="$url(file.url)" download><i class="uk-icon-file-o uk-margin-small-right"></i>{{ file.name }}</a>
                         </h4>
