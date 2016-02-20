@@ -45,10 +45,10 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(28)
+	module.exports = __webpack_require__(31)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(29)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(32)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -63,7 +63,7 @@
 
 /***/ },
 
-/***/ 28:
+/***/ 31:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -78,7 +78,7 @@
 	//                       placeholder="{{ field.data.placeholder || '' | trans }}"
 	//                       :name="fieldid"
 	//                       v-bind="{id: fieldid, rows: field.data.rows}"
-	//                       v-model="dataObject.value"
+	//                       v-model="inputValue"
 	//                       v-validate:required="fieldRequired"
 	//                       v-validate:minLength="minLength"
 	//                       v-validate:maxLength="maxLength"></textarea>
@@ -86,7 +86,7 @@
 	//             <textarea v-else class="uk-form-width-large"
 	//                       placeholder="{{ field.data.placeholder || '' | trans }}"
 	//                       v-bind="{name: fieldid, id: fieldid, rows: field.data.rows}"
-	//                       v-model="dataObject.value"
+	//                       v-model="inputValue"
 	//                       v-validate:required="fieldRequired"></textarea>
 
 	//             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
@@ -131,13 +131,11 @@
 
 	    data: function data() {
 	        return {
-	            dataObject: {},
 	            fieldid: _.uniqueId('formmakerfield_')
 	        };
 	    },
 
 	    created: function created() {
-	        this.$set('dataObject', this.getDataObject(this.field.data.value || ''));
 	        //defaults admin
 	        this.field.data.rows = this.field.data.rows || 4;
 	        this.field.data.minLength = this.field.data.minLength || 0;
@@ -161,10 +159,10 @@
 
 /***/ },
 
-/***/ 29:
+/***/ 32:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <textarea v-if=\"minLength || maxLength\" class=\"uk-form-width-large\"\n                      placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                      :name=\"fieldid\"\n                      v-bind=\"{id: fieldid, rows: field.data.rows}\"\n                      v-model=\"dataObject.value\"\n                      v-validate:required=\"fieldRequired\"\n                      v-validate:minLength=\"minLength\"\n                      v-validate:maxLength=\"maxLength\"></textarea>\n\n            <textarea v-else class=\"uk-form-width-large\"\n                      placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                      v-bind=\"{name: fieldid, id: fieldid, rows: field.data.rows}\"\n                      v-model=\"dataObject.value\"\n                      v-validate:required=\"fieldRequired\"></textarea>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>";
+	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <textarea v-if=\"minLength || maxLength\" class=\"uk-form-width-large\"\n                      placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                      :name=\"fieldid\"\n                      v-bind=\"{id: fieldid, rows: field.data.rows}\"\n                      v-model=\"inputValue\"\n                      v-validate:required=\"fieldRequired\"\n                      v-validate:minLength=\"minLength\"\n                      v-validate:maxLength=\"maxLength\"></textarea>\n\n            <textarea v-else class=\"uk-form-width-large\"\n                      placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                      v-bind=\"{name: fieldid, id: fieldid, rows: field.data.rows}\"\n                      v-model=\"inputValue\"\n                      v-validate:required=\"fieldRequired\"></textarea>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>";
 
 /***/ }
 

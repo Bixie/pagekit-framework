@@ -45,10 +45,10 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(26)
+	module.exports = __webpack_require__(29)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(27)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(30)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -63,7 +63,7 @@
 
 /***/ },
 
-/***/ 26:
+/***/ 29:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -76,7 +76,7 @@
 	//         <div class="uk-form-controls">
 	//             <input type="text" class="uk-form-width-large" placeholder="{{ field.data.placeholder || '' | trans }}"
 	//                    :name="fieldid" :id="fieldid"
-	//                    v-model="dataObject.value"
+	//                    v-model="inputValue"
 	//                    v-validate:required="fieldRequired">
 
 	//             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
@@ -104,13 +104,8 @@
 
 	    data: function data() {
 	        return {
-	            dataObject: {},
 	            fieldid: _.uniqueId('formmakerfield_')
 	        };
-	    },
-
-	    created: function created() {
-	        this.$set('dataObject', this.getDataObject(this.field.data.value || ''));
 	    }
 
 	};
@@ -121,10 +116,10 @@
 
 /***/ },
 
-/***/ 27:
+/***/ 30:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <input type=\"text\" class=\"uk-form-width-large\" placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                   :name=\"fieldid\" :id=\"fieldid\"\n                   v-model=\"dataObject.value\"\n                   v-validate:required=\"fieldRequired\">\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>";
+	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <input type=\"text\" class=\"uk-form-width-large\" placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                   :name=\"fieldid\" :id=\"fieldid\"\n                   v-model=\"inputValue\"\n                   v-validate:required=\"fieldRequired\">\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>";
 
 /***/ }
 

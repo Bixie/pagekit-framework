@@ -45,10 +45,10 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(30)
+	module.exports = __webpack_require__(33)
 
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(31)
+	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(34)
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -63,7 +63,7 @@
 
 /***/ },
 
-/***/ 30:
+/***/ 33:
 /***/ function(module, exports) {
 
 	'use strict';
@@ -77,16 +77,20 @@
 
 	//             <div v-if="message.message" class="uk-alert" :class="message.msg_class">{{ message.message }}</div>
 
-	//             <ul class="uk-list uk-list-striped" v-if="dataObject.value.length">
-	//                 <li v-for="file in dataObject.value" class="uk-flex uk-flex-middle">
+	//             <ul class="uk-list uk-list-striped" v-if="fieldValue.value.length">
+	//                 <li v-for="file in valuedata" class="uk-flex uk-flex-middle">
 	//                     <div class="uk-flex-item-1 uk-margin-left">
+
+	//                         <a class="uk-icon-hover uk-icon-trash-o uk-float-right uk-margin-small-top uk-margin-small-right"
+	//                            @click="removeValue(file.value)" :title="'Remove file' | trans"></a>
+
 	//                         <h4 class="uk-margin-remove">
 	//                             <a :href="$url(file.url)" download><i class="uk-icon-file-o uk-margin-small-right"></i>{{ file.name }}</a>
 	//                         </h4>
 	//                         <small>{{ file.size | fileSize }}</small>
 	//                     </div>
 	//                     <div v-if="isImage(file.url)" class="uk-margin-left">
-	//                         <img :src="file.url" :alt="file.name" style="max-height: 100px"/>
+	//                         <img :src="$url(file.url)" :alt="file.name" style="max-height: 100px"/>
 	//                     </div>
 	//                 </li>
 	//             </ul>
@@ -141,11 +145,10 @@
 
 	    data: function data() {
 	        return {
+	            action: window.$fieldtypes.ajax_url,
 	            path: 'uploads',
 	            upload: {},
 	            selected: [],
-	            dataObject: {},
-	            fileCount: 0,
 	            message: {
 	                message: '',
 	                msg_class: ''
@@ -155,14 +158,13 @@
 	    },
 
 	    created: function created() {
-	        this.$set('dataObject', this.getDataObject(this.field.data.value || []));
 	        if (this.field.data.path) this.$set('path', this.field.data.path);
 	    },
 
 	    computed: {
 	        allowedUploads: function allowedUploads() {
 	            if (this.field.data.max_files >= 1) {
-	                return this.field.data.max_files - this.dataObject.value.length;
+	                return this.field.data.max_files - this.fieldValue.value.length;
 	            }
 	            return true;
 	        }
@@ -193,10 +195,9 @@
 	        'hook:ready': function hookReady() {
 
 	            var uploader = this,
-	                uploadedfiles = uploader.dataObject.value.length,
 	                settings = {
 
-	                action: this.$url.route('api/formmaker/submission/ajax'),
+	                action: this.$url.route(uploader.action),
 
 	                single: false,
 
@@ -247,7 +248,9 @@
 	                    uploader.setMessage(data.message, data.error ? 'danger' : 'success');
 
 	                    if (data.files) {
-	                        uploader.$set('dataObject.value', uploader.dataObject.value.concat(data.files));
+	                        data.files.forEach(function (file) {
+	                            uploader.addValue(file.name, file);
+	                        });
 	                        uploader.$dispatch('upload.success');
 	                    }
 
@@ -274,10 +277,10 @@
 
 /***/ },
 
-/***/ 31:
+/***/ 34:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n\n            <div v-if=\"message.message\" class=\"uk-alert\" :class=\"message.msg_class\">{{ message.message }}</div>\n\n            <ul class=\"uk-list uk-list-striped\" v-if=\"dataObject.value.length\">\n                <li v-for=\"file in dataObject.value\" class=\"uk-flex uk-flex-middle\">\n                    <div class=\"uk-flex-item-1 uk-margin-left\">\n                        <h4 class=\"uk-margin-remove\">\n                            <a :href=\"$url(file.url)\" download><i class=\"uk-icon-file-o uk-margin-small-right\"></i>{{ file.name }}</a>\n                        </h4>\n                        <small>{{ file.size | fileSize }}</small>\n                    </div>\n                    <div v-if=\"isImage(file.url)\" class=\"uk-margin-left\">\n                        <img :src=\"file.url\" :alt=\"file.name\" style=\"max-height: 100px\"/>\n                    </div>\n                </li>\n            </ul>\n\n            <div v-show=\"allowedUploads\" class=\"uk-placeholder\">\n                <i class=\"uk-icon-cloud-upload uk-margin-small-right\"></i>\n                {{ 'Please drop a file here or ' | trans }}<a class=\"uk-form-file\">{{ 'select a file' | trans }}<input\n                    type=\"file\" name=\"files[]\" multiple=\"multiple\"></a>.\n            </div>\n\n            <div class=\"uk-progress uk-progress-mini uk-margin-remove\" v-show=\"upload.running\">\n                <div class=\"uk-progress-bar\" :style=\"{width: upload.progress + '%'}\"></div>\n            </div>\n        </div>\n\n    </div>";
+	module.exports = "<div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n\n            <div v-if=\"message.message\" class=\"uk-alert\" :class=\"message.msg_class\">{{ message.message }}</div>\n\n            <ul class=\"uk-list uk-list-striped\" v-if=\"fieldValue.value.length\">\n                <li v-for=\"file in valuedata\" class=\"uk-flex uk-flex-middle\">\n                    <div class=\"uk-flex-item-1 uk-margin-left\">\n\n                        <a class=\"uk-icon-hover uk-icon-trash-o uk-float-right uk-margin-small-top uk-margin-small-right\"\n                           @click=\"removeValue(file.value)\" :title=\"'Remove file' | trans\"></a>\n\n                        <h4 class=\"uk-margin-remove\">\n                            <a :href=\"$url(file.url)\" download><i class=\"uk-icon-file-o uk-margin-small-right\"></i>{{ file.name }}</a>\n                        </h4>\n                        <small>{{ file.size | fileSize }}</small>\n                    </div>\n                    <div v-if=\"isImage(file.url)\" class=\"uk-margin-left\">\n                        <img :src=\"$url(file.url)\" :alt=\"file.name\" style=\"max-height: 100px\"/>\n                    </div>\n                </li>\n            </ul>\n\n            <div v-show=\"allowedUploads\" class=\"uk-placeholder\">\n                <i class=\"uk-icon-cloud-upload uk-margin-small-right\"></i>\n                {{ 'Please drop a file here or ' | trans }}<a class=\"uk-form-file\">{{ 'select a file' | trans }}<input\n                    type=\"file\" name=\"files[]\" multiple=\"multiple\"></a>.\n            </div>\n\n            <div class=\"uk-progress uk-progress-mini uk-margin-remove\" v-show=\"upload.running\">\n                <div class=\"uk-progress-bar\" :style=\"{width: upload.progress + '%'}\"></div>\n            </div>\n        </div>\n\n    </div>";
 
 /***/ }
 
