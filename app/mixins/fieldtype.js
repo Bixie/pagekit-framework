@@ -17,8 +17,9 @@ module.exports = {
     },
 
     methods: {
-        fieldInvalid: function (form) {
-            return form && form[this.fieldid] ? form[this.fieldid].invalid : false;
+        fieldInvalid: function (form, idx) {
+            idx = idx !== undefined ? idx : '';
+            return form && form[this.fieldid + idx] ? form[this.fieldid + idx].invalid : false;
         },
         classes: function (classes_array, classes_string) {
             return (classes_array || []).concat(String(classes_string || '').split(' '));
@@ -26,6 +27,17 @@ module.exports = {
         addValue: function (value, valuedata) {
             this.fieldValue.value.push(value);
             this.$set('fieldValue.data.data' + (this.fieldValue.value.length - 1), valuedata || {});
+        },
+        removeValue: function (value) {
+            var data = {};
+            this.fieldValue.value.$remove(value);
+            this.fieldValue.value.forEach(function (value, idx) {
+                data['data' + idx] = this.getValuedata(value);
+            }.bind(this));
+            this.fieldValue.data = data;
+        },
+        valuedataModel: function (idx) {
+            return this.fieldValue.data['data' + idx] || {'value': this.fieldValue.value[idx] || ''};
         },
         getValuedata: function (value) {
             return _.find(this.fieldValue.data, 'value', value) || {'value': value};
@@ -42,11 +54,14 @@ module.exports = {
         },
         valuedata: function () {
             if (this.fieldValue.value.length) {
-                return this.fieldValue.value.map(function (value, i) {
-                    return this.fieldValue.data['data' + i] || {'value': value};
+                return this.fieldValue.value.map(function (value, idx) {
+                    return _.assign({'value': value}, this.fieldValue.data['data' + idx]);
                 }.bind(this));
             }
             return [];
+        },
+        allowNewValue: function () {
+            return this.field.data.repeatable && this.fieldValue.value.length < (this.field.data.max_repeat || 10);
         },
         fieldMultiple: function () {
             return !!this.field.data.multiple;
