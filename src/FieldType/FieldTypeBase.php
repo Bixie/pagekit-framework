@@ -153,7 +153,8 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 	 * @param string $value
 	 */
 	public function offsetSet ($key, $value) {
-		Arr::set($this->getConfig(), $key, $value);
+		$config = $this->getConfig();
+		Arr::set($config, $key, $value);
 	}
 
 	/**
@@ -161,7 +162,8 @@ abstract class FieldTypeBase implements FieldTypeInterface, \ArrayAccess, \JsonS
 	 * @param string $key
 	 */
 	public function offsetUnset ($key) {
-		Arr::remove($this->getConfig(), $key);
+		$config = $this->getConfig();
+		Arr::remove($config, $key);
 	}
 
 	/**
