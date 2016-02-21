@@ -6,6 +6,7 @@ namespace Bixie\Framework\FieldType\Upload;
 use Bixie\Framework\Field\FieldBase;
 use Bixie\Framework\FieldValue\FieldValueBase;
 use Pagekit\Application as App;
+use Pagekit\Routing\Generator\UrlGenerator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use Bixie\Framework\FieldType\FieldTypeBase;
@@ -18,14 +19,18 @@ class UploadFieldType extends FieldTypeBase {
 	 * @return array
 	 */
 	public function formatValue (FieldBase $field, FieldValueBase $fieldValue) {
-		return array_map(function ($file) {
-			if (!isset($file['url'])) return '';
-			return sprintf('<a href="%s" download>%s</a> <small>(%s)</small>',
-				App::url($file['url']),
-				$file['name'],
-				App::filter($file['size'], 'filesize')
-			);
-		}, $fieldValue->getValuedata());
+		$valuedata = $fieldValue->getValuedata();
+		if (count($valuedata)) {
+			return array_map(function ($file) {
+				if (!isset($file['url'])) return '';
+				return sprintf('<a href="%s" download>%s</a> <small>(%s)</small>',
+					App::url($file['url'], [], UrlGenerator::ABSOLUTE_URL),
+					$file['name'],
+					App::filter($file['size'], 'filesize')
+				);
+			}, $valuedata);
+		}
+		return ['-'];
 	}
 
 
