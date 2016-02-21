@@ -2,7 +2,7 @@
   "name": "bixie/framework",
   "module": "bixie/framework",
   "type": "pagekit-extension",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "Bixie Framework",
   "description": "Framework for Bixie extensions.",
   "license": "MIT",
