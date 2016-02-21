@@ -17,7 +17,7 @@
         <div class="uk-flex uk-flex-middle uk-margin">
             <div v-show="existing.length">
                 <div class="uk-position-relative" data-uk-dropdown="">
-                    <button type="button" class="uk-button uk-button-small">{{ 'Bestaande' }}</button>
+                    <button type="button" class="uk-button uk-button-small">{{ 'Existing' | trans }}</button>
 
                     <div class="uk-dropdown uk-dropdown-small">
                         <ul class="uk-nav uk-nav-dropdown">
