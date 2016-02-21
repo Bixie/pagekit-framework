@@ -12,6 +12,7 @@ module.exports = function (Vue) {
 
     Vue.field.types.number = '<input type="number" v-bind="attrs" v-model="value" number>';
     Vue.field.types.title = '<h3 v-bind="attrs">{{ title }}</h3>';
+    Vue.field.types.paragraph = '<p v-bind="attrs">{{ text }}</p>';
     Vue.field.types.price = '<i class="uk-icon-euro uk-margin-small-right"></i><input type="number" v-bind="attrs" v-model="value" number>';
     Vue.field.types.multiselect = '<multiselect :values.sync="value" :options="options"></multiselect>';
 
