@@ -123,6 +123,11 @@
 	            tip: 'Folder will be a subfolder of Pagekit storage',
 	            attrs: { 'class': 'uk-form-width-large' }
 	        },
+	        'text1': {
+	            type: 'paragraph',
+	            text: 'To enable uploads, make sure to allow uploading in the usergroups permissions (section bixie/framework)',
+	            attrs: { 'class': 'uk-text-small' }
+	        },
 	        'allowed': {
 	            type: 'tags',
 	            label: 'Allowed extensions',

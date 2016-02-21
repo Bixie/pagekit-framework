@@ -302,7 +302,7 @@
 
 	//                 <div class="uk-position-relative" data-uk-dropdown="">
 
-	//                     <button type="button" class="uk-button uk-button-small">{{ 'Bestaande' }}</button>
+	//                     <button type="button" class="uk-button uk-button-small">{{ 'Existing' | trans }}</button>
 
 	//                     <div class="uk-dropdown uk-dropdown-small">
 
@@ -388,7 +388,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n        <ul v-if=\"style == 'list'\" class=\"uk-list uk-list-line\">\r\n            <li v-for=\"tag in tags\">\r\n                <a class=\"uk-float-right uk-close\" @click.prevent=\"removeTag(tag)\"></a>\r\n                {{ tag }}\r\n            </li>\r\n        </ul>\r\n        <div v-else class=\"uk-flex uk-flex-wrap\" data-uk-margin=\"\">\r\n            <div v-for=\"tag in tags\" class=\"uk-badge uk-margin-small-right\" track-by=\"$index\">\r\n                <a class=\"uk-float-right uk-close\" @click.prevent=\"removeTag(tag)\"></a>\r\n                {{ tag }}\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"uk-flex uk-flex-middle uk-margin\">\r\n            <div v-show=\"existing.length\">\r\n                <div class=\"uk-position-relative\" data-uk-dropdown=\"\">\r\n                    <button type=\"button\" class=\"uk-button uk-button-small\">{{ 'Bestaande' }}</button>\r\n\r\n                    <div class=\"uk-dropdown uk-dropdown-small\">\r\n                        <ul class=\"uk-nav uk-nav-dropdown\">\r\n                            <li v-for=\"tag in existing\"><a :class=\"{'uk-text-muted': selected(tag)}\" @click.prevent=\"addTag(tag)\">{{ tag }}</a></li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"uk-flex-item-1 uk-margin-small-left\">\r\n                <div class=\"uk-form-password\">\r\n                    <input type=\"text\" class=\"uk-width-1-1\" v-model=\"newtag\">\r\n                    <a class=\"uk-form-password-toggle\" @click.prevent=\"addTag()\"><i\r\n                            class=\"uk-icon-check uk-icon-hover\"></i></a>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n    </div>";
+	module.exports = "<div>\r\n        <ul v-if=\"style == 'list'\" class=\"uk-list uk-list-line\">\r\n            <li v-for=\"tag in tags\">\r\n                <a class=\"uk-float-right uk-close\" @click.prevent=\"removeTag(tag)\"></a>\r\n                {{ tag }}\r\n            </li>\r\n        </ul>\r\n        <div v-else class=\"uk-flex uk-flex-wrap\" data-uk-margin=\"\">\r\n            <div v-for=\"tag in tags\" class=\"uk-badge uk-margin-small-right\" track-by=\"$index\">\r\n                <a class=\"uk-float-right uk-close\" @click.prevent=\"removeTag(tag)\"></a>\r\n                {{ tag }}\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"uk-flex uk-flex-middle uk-margin\">\r\n            <div v-show=\"existing.length\">\r\n                <div class=\"uk-position-relative\" data-uk-dropdown=\"\">\r\n                    <button type=\"button\" class=\"uk-button uk-button-small\">{{ 'Existing' | trans }}</button>\r\n\r\n                    <div class=\"uk-dropdown uk-dropdown-small\">\r\n                        <ul class=\"uk-nav uk-nav-dropdown\">\r\n                            <li v-for=\"tag in existing\"><a :class=\"{'uk-text-muted': selected(tag)}\" @click.prevent=\"addTag(tag)\">{{ tag }}</a></li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"uk-flex-item-1 uk-margin-small-left\">\r\n                <div class=\"uk-form-password\">\r\n                    <input type=\"text\" class=\"uk-width-1-1\" v-model=\"newtag\">\r\n                    <a class=\"uk-form-password-toggle\" @click.prevent=\"addTag()\"><i\r\n                            class=\"uk-icon-check uk-icon-hover\"></i></a>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n    </div>";
 
 /***/ },
 /* 9 */
@@ -430,6 +430,7 @@
 
 	    Vue.field.types.number = '<input type="number" v-bind="attrs" v-model="value" number>';
 	    Vue.field.types.title = '<h3 v-bind="attrs">{{ title }}</h3>';
+	    Vue.field.types.paragraph = '<p v-bind="attrs">{{ text }}</p>';
 	    Vue.field.types.price = '<i class="uk-icon-euro uk-margin-small-right"></i><input type="number" v-bind="attrs" v-model="value" number>';
 	    Vue.field.types.multiselect = '<multiselect :values.sync="value" :options="options"></multiselect>';
 
