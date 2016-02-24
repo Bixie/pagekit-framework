@@ -52,10 +52,14 @@ abstract class FieldValueBase implements FieldValueInterface {
 	}
 
 	/**
-	 * @return array
+	 * @param bool $asArray
+	 * @return array|mixed
 	 */
-	public function getValue () {
-		return $this->value ? : [];
+	public function getValue ($asArray = true) {
+		if ($asArray) {
+			return $this->value ?: [];
+		}
+		return $this->field->get('multiple') ? ($this->value ?: []) : (reset($this->value) ? : '');
 	}
 
 	/**
