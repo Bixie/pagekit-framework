@@ -105,7 +105,7 @@
 	//             </ul>
 
 	//             <div v-if="allowNewValue" class="uk-margin-small-top">
-	//                 <a @click="addValue('', {value: '', link_text: '', blank: 0})">
+	//                 <a @click="addValue('', {value: '', link_text: field.data.link_text_default, blank: field.data.blank_default})">
 	//                     <i class="uk-icon-hover uk-icon-plus uk-margin-small-right"></i>{{ 'Add value' | trans }}</a>
 	//             </div>
 
@@ -155,7 +155,11 @@
 
 	    created: function created() {
 	        if (this.fieldValue.value.length == 0) {
-	            this.addValue('', { value: '', link_text: '', blank: 0 });
+	            this.addValue('', {
+	                value: '',
+	                link_text: this.field.data.link_text_default,
+	                blank: this.field.data.blank_default
+	            });
 	        }
 	    }
 
@@ -170,7 +174,7 @@
 /***/ 28:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <ul class=\"uk-list uk-margin-remove uk-list-line\">\n                <li v-for=\"site in fieldValue.data\">\n\n                    <div class=\"uk-flex uk-flex-middle uk-flex-space-between\">\n                        <input type=\"text\" class=\"uk-form-width-large\"\n                               placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                               :name=\"fieldid + $index\" :id=\"fieldid\" v-validate:url\n                               v-validate:required=\"fieldRequired && $index == 0\"\n                               v-model=\"site.value\" @change=\"fieldValue.value[$index] = site.value\">\n\n                        <a v-if=\"$index > 0\"\n                           class=\"uk-icon-hover uk-icon-trash-o uk-margin-left\"\n                           @click=\"removeValue(site.value)\" :title=\"'Remove value' | trans\"></a>\n\n                    </div>\n\n\n                    <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form, $index)\">{{ field.data.requiredError ||\n                        'Please enter a valid url' | trans }}</p>\n\n                    <div v-if=\"field.data.controls\" class=\"uk-margin-small-top uk-flex uk-flex-middle uk-flex-space-between\">\n\n                        <input type=\"text\" class=\"uk-form-width-medium\" :placeholder=\"'Link text' | trans\"\n                               v-model=\"site.link_text\"/>\n                        <label><input type=\"checkbox\" :true-value=\"1\" :false-value=\"0\" class=\"uk-margin-small-right\"\n                                      v-model=\"site.blank\" number/>{{ 'Open in new window' | trans }}</label>\n                    </div>\n\n                </li>\n            </ul>\n\n            <div v-if=\"allowNewValue\" class=\"uk-margin-small-top\">\n                <a @click=\"addValue('', {value: '', link_text: '', blank: 0})\">\n                    <i class=\"uk-icon-hover uk-icon-plus uk-margin-small-right\"></i>{{ 'Add value' | trans }}</a>\n            </div>\n\n        </div>\n    </div>";
+	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <ul class=\"uk-list uk-margin-remove uk-list-line\">\n                <li v-for=\"site in fieldValue.data\">\n\n                    <div class=\"uk-flex uk-flex-middle uk-flex-space-between\">\n                        <input type=\"text\" class=\"uk-form-width-large\"\n                               placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                               :name=\"fieldid + $index\" :id=\"fieldid\" v-validate:url\n                               v-validate:required=\"fieldRequired && $index == 0\"\n                               v-model=\"site.value\" @change=\"fieldValue.value[$index] = site.value\">\n\n                        <a v-if=\"$index > 0\"\n                           class=\"uk-icon-hover uk-icon-trash-o uk-margin-left\"\n                           @click=\"removeValue(site.value)\" :title=\"'Remove value' | trans\"></a>\n\n                    </div>\n\n\n                    <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form, $index)\">{{ field.data.requiredError ||\n                        'Please enter a valid url' | trans }}</p>\n\n                    <div v-if=\"field.data.controls\" class=\"uk-margin-small-top uk-flex uk-flex-middle uk-flex-space-between\">\n\n                        <input type=\"text\" class=\"uk-form-width-medium\" :placeholder=\"'Link text' | trans\"\n                               v-model=\"site.link_text\"/>\n                        <label><input type=\"checkbox\" :true-value=\"1\" :false-value=\"0\" class=\"uk-margin-small-right\"\n                                      v-model=\"site.blank\" number/>{{ 'Open in new window' | trans }}</label>\n                    </div>\n\n                </li>\n            </ul>\n\n            <div v-if=\"allowNewValue\" class=\"uk-margin-small-top\">\n                <a @click=\"addValue('', {value: '', link_text: field.data.link_text_default, blank: field.data.blank_default})\">\n                    <i class=\"uk-icon-hover uk-icon-plus uk-margin-small-right\"></i>{{ 'Add value' | trans }}</a>\n            </div>\n\n        </div>\n    </div>";
 
 /***/ }
 

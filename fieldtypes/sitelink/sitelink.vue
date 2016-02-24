@@ -36,7 +36,7 @@
             </ul>
 
             <div v-if="allowNewValue" class="uk-margin-small-top">
-                <a @click="addValue('', {value: '', link_text: '', blank: 0})">
+                <a @click="addValue('', {value: '', link_text: field.data.link_text_default, blank: field.data.blank_default})">
                     <i class="uk-icon-hover uk-icon-plus uk-margin-small-right"></i>{{ 'Add value' | trans }}</a>
             </div>
 
@@ -86,7 +86,11 @@
 
         created: function () {
             if (this.fieldValue.value.length == 0) {
-                this.addValue('', {value: '', link_text: '', blank: 0});
+                this.addValue('', {
+                    value: '',
+                    link_text: this.field.data.link_text_default,
+                    blank:  this.field.data.blank_default
+                });
             }
         }
 

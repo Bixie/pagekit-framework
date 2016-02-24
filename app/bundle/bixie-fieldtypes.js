@@ -147,7 +147,7 @@ var BixieFieldtypes =
 	        },
 	        addValue: function (value, valuedata) {
 	            this.fieldValue.value.push(value);
-	            this.$set('fieldValue.data.data' + (this.fieldValue.value.length - 1), valuedata || {});
+	            this.$set('fieldValue.data.data' + (this.fieldValue.value.length - 1), valuedata || {'value': value});
 	        },
 	        removeValue: function (value) {
 	            var data = {};
