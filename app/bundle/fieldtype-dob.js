@@ -72,7 +72,11 @@
 
 	//     <div v-el:dob :class="classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)">
 
-	//         <span class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}</span>
+	//         <span class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
+	//             <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
+	//                class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
+	//                :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
+	//         </span>
 
 	//         <div class="uk-form-controls uk-flex">
 	//             <div class="uk-grid uk-grid-small uk-grid-width-1-3 uk-width-1-1">
@@ -105,6 +109,9 @@
 	//                 </div>
 
 	//             </div>
+	//             <p v-if="field.data.help_text && field.data.help_show == 'block'"
+	//                class="uk-form-help-block">{{{field.data.help_text}}}</p>
+
 	//         </div>
 	//     </div>
 
@@ -240,7 +247,7 @@
 /***/ 15:
 /***/ function(module, exports) {
 
-	module.exports = "<div v-el:dob :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n\n        <span class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</span>\n\n        <div class=\"uk-form-controls uk-flex\">\n            <div class=\"uk-grid uk-grid-small uk-grid-width-1-3 uk-width-1-1\">\n\n                <div>\n                    <div class=\"uk-button uk-width-1-1 uk-form-select\" data-uk-form-select><span></span>\n                        <i class=\"uk-icon-caret-down uk-margin-left\"></i>\n                        <select class=\"\" v-model=\"month\">\n                            <option v-for=\"option in months\" :value=\"option.value\">{{ option.text }}</option>\n                        </select>\n                    </div>\n                </div>\n\n                <div :class=\"{'uk-flex-order-first': field.data.dateFormat == 'DD-MM-YYYY'}\">\n                    <div class=\"uk-button uk-width-1-1 uk-form-select\" data-uk-form-select><span></span>\n                        <i class=\"uk-icon-caret-down uk-margin-left\"></i>\n                        <select class=\"\" v-model=\"day\">\n                            <option v-for=\"option in days\" :value=\"option\">{{ $key }}</option>\n                        </select>\n                    </div>\n                </div>\n\n                <div>\n                    <div class=\"uk-button uk-width-1-1 uk-form-select\" data-uk-form-select><span></span>\n                        <i class=\"uk-icon-caret-down uk-margin-left\"></i>\n                        <select class=\"\" v-model=\"year\">\n                            <option v-for=\"option in years\" :value=\"option\">{{ $key }}</option>\n                        </select>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n    </div>";
+	module.exports = "<div v-el:dob :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n\n        <span class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n        </span>\n\n        <div class=\"uk-form-controls uk-flex\">\n            <div class=\"uk-grid uk-grid-small uk-grid-width-1-3 uk-width-1-1\">\n\n                <div>\n                    <div class=\"uk-button uk-width-1-1 uk-form-select\" data-uk-form-select><span></span>\n                        <i class=\"uk-icon-caret-down uk-margin-left\"></i>\n                        <select class=\"\" v-model=\"month\">\n                            <option v-for=\"option in months\" :value=\"option.value\">{{ option.text }}</option>\n                        </select>\n                    </div>\n                </div>\n\n                <div :class=\"{'uk-flex-order-first': field.data.dateFormat == 'DD-MM-YYYY'}\">\n                    <div class=\"uk-button uk-width-1-1 uk-form-select\" data-uk-form-select><span></span>\n                        <i class=\"uk-icon-caret-down uk-margin-left\"></i>\n                        <select class=\"\" v-model=\"day\">\n                            <option v-for=\"option in days\" :value=\"option\">{{ $key }}</option>\n                        </select>\n                    </div>\n                </div>\n\n                <div>\n                    <div class=\"uk-button uk-width-1-1 uk-form-select\" data-uk-form-select><span></span>\n                        <i class=\"uk-icon-caret-down uk-margin-left\"></i>\n                        <select class=\"\" v-model=\"year\">\n                            <option v-for=\"option in years\" :value=\"option\">{{ $key }}</option>\n                        </select>\n                    </div>\n                </div>\n\n            </div>\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n\n        </div>\n    </div>";
 
 /***/ }
 

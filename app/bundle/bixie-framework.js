@@ -51,8 +51,12 @@
 	    Vue.component('input-tags', __webpack_require__(6));
 	    //directives
 	    Vue.directive('spinner', __webpack_require__(9));
+	    //partials
+	    Vue.partial('fieldtype-basic', __webpack_require__(10));
+	    Vue.partial('fieldtype-settings', __webpack_require__(11));
+	    Vue.partial('fieldtype-appearance', __webpack_require__(12));
 	    //fields
-	    __webpack_require__(10)(Vue);
+	    __webpack_require__(13)(Vue);
 
 	}
 
@@ -414,13 +418,31 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"uk-form-row\">\r\n    <label for=\"form-label\" class=\"uk-form-label\">{{ 'Label' | trans }}</label>\r\n\r\n    <div class=\"uk-form-controls\">\r\n        <input id=\"form-label\" class=\"uk-form-width-large\" type=\"text\" name=\"label\"\r\n               v-model=\"field.label\" v-validate:required>\r\n    </div>\r\n    <p class=\"uk-form-help-block uk-text-danger\" v-show=\"form.label.invalid\">{{ 'Please enter a label' | trans }}</p>\r\n</div>\r\n\r\n<div class=\"uk-form-row\">\r\n    <label for=\"form-slug\" class=\"uk-form-label\">{{ 'Slug' | trans }}</label>\r\n\r\n    <div class=\"uk-form-controls\">\r\n        <input id=\"form-slug\" class=\"uk-form-width-large\" type=\"text\" v-model=\"field.slug\">\r\n    </div>\r\n</div>\r\n\r\n<div class=\"uk-margin\" v-if=\"fieldSettings\">\r\n    <fields :config=\"fieldSettings\" :model.sync=\"field.data\" template=\"formrow\"></fields>\r\n</div>\r\n\r\n<div class=\"uk-form-row\">\r\n    <label for=\"form-slug\" class=\"uk-form-label\">{{ 'Help text' | trans }}</label>\r\n\r\n    <div class=\"uk-form-controls\">\r\n        <textarea id=\"form-help_text\" class=\"uk-form-width-large\"\r\n                  rows=\"2\" cols=\"40\" v-model=\"field.data.help_text\"></textarea>\r\n    </div>\r\n</div>\r\n\r\n";
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+	module.exports = "<div v-if=\"type.required < 0\" class=\"uk-form-row\">\r\n    <span class=\"uk-form-label\">{{ 'Field required' | trans }}</span>\r\n\r\n    <div class=\"uk-form-controls uk-form-controls-text\">\r\n        <label><input type=\"checkbox\" value=\"required\" v-model=\"field.data.required\"> {{ 'Required' | trans\r\n            }}</label>\r\n    </div>\r\n</div>\r\n\r\n<div v-if=\"type.multiple < 0\" class=\"uk-form-row\">\r\n    <span class=\"uk-form-label\">{{ 'Multiple values' | trans }}</span>\r\n\r\n    <div class=\"uk-form-controls uk-form-controls-text\">\r\n        <label><input type=\"checkbox\" value=\"multiple\" v-model=\"field.data.multiple\"> {{ 'Multiple' | trans\r\n            }}</label>\r\n    </div>\r\n</div>\r\n\r\n<div v-if=\"type.controls < 0\" class=\"uk-form-row\">\r\n    <span class=\"uk-form-label\">{{ 'Extra controls' | trans }}</span>\r\n\r\n    <div class=\"uk-form-controls uk-form-controls-text\">\r\n        <label><input type=\"checkbox\" value=\"controls\" v-model=\"field.data.controls\"> {{ 'Show controls' | trans\r\n            }}</label>\r\n    </div>\r\n</div>\r\n\r\n<div v-if=\"type.repeatable < 0\" class=\"uk-form-row\">\r\n    <span class=\"uk-form-label\">{{ 'Field repeat' | trans }}</span>\r\n\r\n    <div class=\"uk-form-controls uk-form-controls-text\">\r\n        <label><input type=\"checkbox\" value=\"repeatable\" v-model=\"field.data.repeatable\"> {{ 'Repeatable' | trans\r\n            }}</label>\r\n\r\n        <div v-show=\"field.data.repeatable == 1\" class=\"uk-flex uk-flex-middle uk-margin-left\">\r\n            <span class=\"uk-margin-small-right\">{{ 'Maximum' | trans }}</span>\r\n            <input type=\"number\" class=\"uk-text-right uk-form-small uk-form-width-mini\"\r\n                   v-model=\"field.data.max_repeat\" min=\"1\" :max=\"type.max_repeat\" number/>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n\r\n<div class=\"uk-form-row\" v-if=\"field.roles\">\r\n    <span class=\"uk-form-label\">{{ 'Restrict Access' | trans }}</span>\r\n\r\n    <div class=\"uk-form-controls uk-form-controls-text\">\r\n        <p v-for=\"role in roles\" class=\"uk-form-controls-condensed\">\r\n            <label><input type=\"checkbox\" :value=\"role.id\" v-model=\"field.roles\" number> {{ role.name }}</label>\r\n        </p>\r\n    </div>\r\n</div>\r\n";
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"uk-form-row\">\r\n    <span class=\"uk-form-label\">{{ 'Label' | trans }}</span>\r\n\r\n    <div class=\"uk-form-controls uk-form-controls-text\">\r\n        <label><input type=\"checkbox\" value=\"hide-label\" v-model=\"field.data.hide_label\"> {{ 'Hide Label' |\r\n            trans }}</label>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"uk-form-row\">\r\n    <label for=\"form-class\" class=\"uk-form-label\">{{ 'Class suffix' | trans }}</label>\r\n\r\n    <div class=\"uk-form-controls\">\r\n        <input id=\"form-class\" class=\"uk-form-width-large\" type=\"text\" v-model=\"field.data.classSfx\">\r\n    </div>\r\n</div>\r\n\r\n<div class=\"uk-form-row\" v-show=\"field.data.required\">\r\n    <label for=\"form-required-error\" class=\"uk-form-label\">{{ 'Required error message' | trans }}</label>\r\n\r\n    <div class=\"uk-form-controls\">\r\n        <input id=\"form-required-error\" class=\"uk-form-width-large\" type=\"text\"\r\n               v-model=\"field.data.requiredError\">\r\n    </div>\r\n</div>\r\n\r\n<div class=\"uk-form-row\">\r\n    <label for=\"form-required-error\" class=\"uk-form-label\">{{ 'Display help text' | trans }}</label>\r\n\r\n    <div class=\"uk-form-controls\">\r\n        <select id=\"form-help_show\" class=\"uk-form-width-medium\" v-model=\"field.data.help_show\">\r\n            <option value=\"\">{{ 'Don\\'t show' | trans }}</option>\r\n            <option value=\"tooltip_icon\">{{ 'Tooltip icon' | trans }}</option>\r\n            <option value=\"block\">{{ 'Below input' | trans }}</option>\r\n         </select>\r\n    </div>\r\n</div>\r\n";
+
+/***/ },
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function (Vue) {
 
-	    Vue.field.templates.formrow = __webpack_require__(11);
-	    Vue.field.templates.raw = __webpack_require__(12);
-	    Vue.field.templates.descriptionlist = __webpack_require__(13);
+	    Vue.field.templates.formrow = __webpack_require__(14);
+	    Vue.field.templates.raw = __webpack_require__(15);
+	    Vue.field.templates.descriptionlist = __webpack_require__(16);
 
 	    Vue.field.types.text = '<input type="text" v-bind="attrs" v-model="value">';
 	    Vue.field.types.textarea = '<textarea v-bind="attrs" v-model="value"></textarea>';
@@ -442,19 +464,19 @@
 
 
 /***/ },
-/* 11 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = "<div v-for=\"field in fields\" :class=\"{'uk-form-row': !field.raw}\">\r\n    <label v-if=\"field.label\" class=\"uk-form-label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label | trans }}\r\n    </label>\r\n    <div v-if=\"!field.raw\" class=\"uk-form-controls\" :class=\"{'uk-form-controls-text': ['checkbox', 'radio'].indexOf(field.type)>-1}\">\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </div>\r\n    <field v-else :config=\"field\" :values.sync=\"values\"></field>\r\n</div>\r\n";
 
 /***/ },
-/* 12 */
+/* 15 */
 /***/ function(module, exports) {
 
 	module.exports = "<template v-for=\"field in fields\">\r\n    <field :config=\"field\" :values.sync=\"values\"></field>\r\n</template>\r\n";
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports) {
 
 	module.exports = "<template v-for=\"field in fields\">\r\n    <dt v-if=\"field.label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label }}\r\n    </dt>\r\n    <dd>\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </dd>\r\n</template>\r\n";

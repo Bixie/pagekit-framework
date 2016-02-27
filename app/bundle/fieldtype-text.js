@@ -71,13 +71,20 @@
 	// <template>
 
 	//     <div :class="classes(['uk-form-row'], field.data.classSfx)">
-	//         <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}</label>
+	//         <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
+	//             <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
+	//                class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
+	//                :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
+	//         </label>
 
 	//         <div class="uk-form-controls">
 	//             <input type="text" class="uk-form-width-large" placeholder="{{ field.data.placeholder || '' | trans }}"
 	//                    :name="fieldid" :id="fieldid"
 	//                    v-model="inputValue"
 	//                    v-validate:required="fieldRequired">
+
+	//             <p v-if="field.data.help_text && field.data.help_show == 'block'"
+	//                class="uk-form-help-block">{{{field.data.help_text}}}</p>
 
 	//             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
 	//                 'Please enter a value' | trans }}</p>
@@ -119,7 +126,7 @@
 /***/ 30:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n            <input type=\"text\" class=\"uk-form-width-large\" placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                   :name=\"fieldid\" :id=\"fieldid\"\n                   v-model=\"inputValue\"\n                   v-validate:required=\"fieldRequired\">\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>";
+	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n        </label>\n\n        <div class=\"uk-form-controls\">\n            <input type=\"text\" class=\"uk-form-width-large\" placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                   :name=\"fieldid\" :id=\"fieldid\"\n                   v-model=\"inputValue\"\n                   v-validate:required=\"fieldRequired\">\n\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>";
 
 /***/ }
 

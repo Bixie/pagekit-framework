@@ -71,7 +71,11 @@
 	// <template>
 
 	//     <div :class="classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)">
-	//         <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}</label>
+	//         <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
+	//             <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
+	//                class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
+	//                :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
+	//         </label>
 
 	//         <div class="uk-form-controls">
 
@@ -104,6 +108,10 @@
 	//             <div class="uk-progress uk-progress-mini uk-margin-remove" v-show="upload.running">
 	//                 <div class="uk-progress-bar" :style="{width: upload.progress + '%'}"></div>
 	//             </div>
+
+	//             <p v-if="field.data.help_text && field.data.help_show == 'block'"
+	//                class="uk-form-help-block">{{{field.data.help_text}}}</p>
+
 	//         </div>
 
 	//     </div>
@@ -285,7 +293,7 @@
 /***/ 34:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}</label>\n\n        <div class=\"uk-form-controls\">\n\n            <div v-if=\"message.message\" class=\"uk-alert\" :class=\"message.msg_class\">{{ message.message }}</div>\n\n            <ul class=\"uk-list uk-list-striped\" v-if=\"fieldValue.value.length\">\n                <li v-for=\"file in valuedata\" class=\"uk-flex uk-flex-middle\">\n                    <div class=\"uk-flex-item-1 uk-margin-left\">\n\n                        <a class=\"uk-icon-hover uk-icon-trash-o uk-float-right uk-margin-small-top uk-margin-small-right\"\n                           @click=\"removeValue(file.value)\" :title=\"'Remove file' | trans\"></a>\n\n                        <h4 class=\"uk-margin-remove\">\n                            <a :href=\"$url(file.url)\" download><i class=\"uk-icon-file-o uk-margin-small-right\"></i>{{ file.name }}</a>\n                        </h4>\n                        <small>{{ file.size | fileSize }}</small>\n                    </div>\n                    <div v-if=\"isImage(file.url)\" class=\"uk-margin-left\">\n                        <img :src=\"$url(file.url)\" :alt=\"file.name\" style=\"max-height: 100px\"/>\n                    </div>\n                </li>\n            </ul>\n\n            <div v-show=\"allowedUploads\" class=\"uk-placeholder\">\n                <i class=\"uk-icon-cloud-upload uk-margin-small-right\"></i>\n                {{ 'Please drop a file here or ' | trans }}<a class=\"uk-form-file\">{{ 'select a file' | trans }}<input\n                    type=\"file\" name=\"files[]\" multiple=\"multiple\"></a>.\n            </div>\n\n            <div class=\"uk-progress uk-progress-mini uk-margin-remove\" v-show=\"upload.running\">\n                <div class=\"uk-progress-bar\" :style=\"{width: upload.progress + '%'}\"></div>\n            </div>\n        </div>\n\n    </div>";
+	module.exports = "<div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n        </label>\n\n        <div class=\"uk-form-controls\">\n\n            <div v-if=\"message.message\" class=\"uk-alert\" :class=\"message.msg_class\">{{ message.message }}</div>\n\n            <ul class=\"uk-list uk-list-striped\" v-if=\"fieldValue.value.length\">\n                <li v-for=\"file in valuedata\" class=\"uk-flex uk-flex-middle\">\n                    <div class=\"uk-flex-item-1 uk-margin-left\">\n\n                        <a class=\"uk-icon-hover uk-icon-trash-o uk-float-right uk-margin-small-top uk-margin-small-right\"\n                           @click=\"removeValue(file.value)\" :title=\"'Remove file' | trans\"></a>\n\n                        <h4 class=\"uk-margin-remove\">\n                            <a :href=\"$url(file.url)\" download><i class=\"uk-icon-file-o uk-margin-small-right\"></i>{{ file.name }}</a>\n                        </h4>\n                        <small>{{ file.size | fileSize }}</small>\n                    </div>\n                    <div v-if=\"isImage(file.url)\" class=\"uk-margin-left\">\n                        <img :src=\"$url(file.url)\" :alt=\"file.name\" style=\"max-height: 100px\"/>\n                    </div>\n                </li>\n            </ul>\n\n            <div v-show=\"allowedUploads\" class=\"uk-placeholder\">\n                <i class=\"uk-icon-cloud-upload uk-margin-small-right\"></i>\n                {{ 'Please drop a file here or ' | trans }}<a class=\"uk-form-file\">{{ 'select a file' | trans }}<input\n                    type=\"file\" name=\"files[]\" multiple=\"multiple\"></a>.\n            </div>\n\n            <div class=\"uk-progress uk-progress-mini uk-margin-remove\" v-show=\"upload.running\">\n                <div class=\"uk-progress-bar\" :style=\"{width: upload.progress + '%'}\"></div>\n            </div>\n\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n        </div>\n\n    </div>";
 
 /***/ }
 
