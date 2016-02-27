@@ -8,7 +8,7 @@
                :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
         </span>
 
-        <div class="uk-form-controls uk-flex">
+        <div class="uk-form-controls">
             <div class="uk-grid uk-grid-small uk-grid-width-1-3 uk-width-1-1">
 
                 <div>
