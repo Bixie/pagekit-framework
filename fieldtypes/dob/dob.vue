@@ -2,7 +2,11 @@
 
     <div v-el:dob :class="classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)">
 
-        <span class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}</span>
+        <span class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
+            <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
+               class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
+               :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
+        </span>
 
         <div class="uk-form-controls uk-flex">
             <div class="uk-grid uk-grid-small uk-grid-width-1-3 uk-width-1-1">
@@ -35,6 +39,10 @@
                 </div>
 
             </div>
+            <p v-if="field.data.help_text && field.data.help_show == 'block'"
+               class="uk-form-help-block">{{{field.data.help_text}}}</p>
+
+
         </div>
     </div>
 

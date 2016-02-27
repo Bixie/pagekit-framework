@@ -20,3 +20,12 @@
     <fields :config="fieldSettings" :model.sync="field.data" template="formrow"></fields>
 </div>
 
+<div class="uk-form-row">
+    <label for="form-slug" class="uk-form-label">{{ 'Help text' | trans }}</label>
+
+    <div class="uk-form-controls">
+        <textarea id="form-help_text" class="uk-form-width-large"
+                  rows="2" cols="40" v-model="field.data.help_text"></textarea>
+    </div>
+</div>
+

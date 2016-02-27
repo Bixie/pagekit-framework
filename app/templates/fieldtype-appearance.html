@@ -24,3 +24,14 @@
     </div>
 </div>
 
+<div class="uk-form-row">
+    <label for="form-required-error" class="uk-form-label">{{ 'Display help text' | trans }}</label>
+
+    <div class="uk-form-controls">
+        <select id="form-help_show" class="uk-form-width-medium" v-model="field.data.help_show">
+            <option value="">{{ 'Don\'t show' | trans }}</option>
+            <option value="tooltip_icon">{{ 'Tooltip icon' | trans }}</option>
+            <option value="block">{{ 'Below input' | trans }}</option>
+         </select>
+    </div>
+</div>

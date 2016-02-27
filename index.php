@@ -41,7 +41,7 @@ return [
 			$scripts->register('framework-settings', 'bixie/framework:app/bundle/settings.js', '~extensions');
 			$scripts->register('bixie-framework', 'bixie/framework:app/bundle/bixie-framework.js', ['vue']);
 			//register fields
-			$scripts->register('bixie-fieldtypes', 'bixie/framework:app/bundle/bixie-fieldtypes.js', ['vue', 'bixie-framework']);
+			$scripts->register('bixie-fieldtypes', 'bixie/framework:app/bundle/bixie-fieldtypes.js', ['vue', 'bixie-framework', 'uikit-tooltip']);
 			foreach ($app->module('bixie/framework')->getFieldTypes() as $fieldType) {
 				$fieldType->registerScripts($scripts);
 			}

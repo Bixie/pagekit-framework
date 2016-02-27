@@ -1,7 +1,11 @@
 <template>
 
     <div :class="classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)">
-        <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}</label>
+        <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
+            <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
+               class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
+               :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
+        </label>
 
         <div class="uk-form-controls">
 
@@ -34,6 +38,10 @@
             <div class="uk-progress uk-progress-mini uk-margin-remove" v-show="upload.running">
                 <div class="uk-progress-bar" :style="{width: upload.progress + '%'}"></div>
             </div>
+
+            <p v-if="field.data.help_text && field.data.help_show == 'block'"
+               class="uk-form-help-block">{{{field.data.help_text}}}</p>
+
         </div>
 
     </div>

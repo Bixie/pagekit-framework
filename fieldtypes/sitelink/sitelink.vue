@@ -1,7 +1,11 @@
 <template>
 
     <div :class="classes(['uk-form-row'], field.data.classSfx)">
-        <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}</label>
+        <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
+            <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
+               class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
+               :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
+        </label>
 
         <div class="uk-form-controls">
             <ul class="uk-list uk-margin-remove uk-list-line">
@@ -39,6 +43,9 @@
                 <a @click="addValue('', {value: '', link_text: field.data.link_text_default, blank: field.data.blank_default})">
                     <i class="uk-icon-hover uk-icon-plus uk-margin-small-right"></i>{{ 'Add value' | trans }}</a>
             </div>
+
+            <p v-if="field.data.help_text && field.data.help_show == 'block'"
+               class="uk-form-help-block">{{{field.data.help_text}}}</p>
 
         </div>
     </div>
