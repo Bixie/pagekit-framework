@@ -45,10 +45,12 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(23)
-
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(12)
+	__vue_template__ = __webpack_require__(13)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(24)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -57,28 +59,28 @@
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
 
-/***/ 23:
+/***/ 12:
 /***/ function(module, exports) {
 
 	'use strict';
 
 	// <template>
-
+	//
 	//     <div :class="classes(['uk-form-row'], field.data.classSfx)">
 	//         <label :for="fieldid" class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
 	//             <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
 	//                class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
 	//                :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
 	//         </label>
-
+	//
 	//         <div class="uk-form-controls">
-
+	//
 	//             <select v-if="field.data.multiple" class="uk-form-width-large" multiple="multiple"
 	//                     :name="fieldid"
 	//                     v-bind="{id: fieldid, size:field.data.size > 1 ? field.data.size : false}"
@@ -86,7 +88,7 @@
 	//                     v-validate:required="fieldRequired">
 	//                 <option v-for="option in field.options" :value="option.value">{{ option.text }}</option>
 	//             </select>
-
+	//
 	//             <select v-else class="uk-form-width-large"
 	//                     :name="fieldid"
 	//                     v-bind="{id: fieldid, size:field.data.size > 1 ? field.data.size : false}"
@@ -94,17 +96,17 @@
 	//                     v-validate:required="fieldRequired">
 	//                 <option v-for="option in field.options" :value="option.value">{{ option.text }}</option>
 	//             </select>
-
+	//
 	//             <p v-if="field.data.help_text && field.data.help_show == 'block'"
 	//                class="uk-form-help-block">{{{field.data.help_text}}}</p>
-
+	//
 	//             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
 	//                 'Please select a value' | trans }}</p>
 	//         </div>
 	//     </div>
-
+	//
 	// </template>
-
+	//
 	// <script>
 
 	module.exports = {
@@ -132,13 +134,14 @@
 	window.BixieFieldtypes.components['pulldown'] = module.exports;
 
 	// </script>
+	//
 
 /***/ },
 
-/***/ 24:
+/***/ 13:
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n        </label>\n\n        <div class=\"uk-form-controls\">\n\n            <select v-if=\"field.data.multiple\" class=\"uk-form-width-large\" multiple=\"multiple\"\n                    :name=\"fieldid\"\n                    v-bind=\"{id: fieldid, size:field.data.size > 1 ? field.data.size : false}\"\n                    v-model=\"inputValue\"\n                    v-validate:required=\"fieldRequired\">\n                <option v-for=\"option in field.options\" :value=\"option.value\">{{ option.text }}</option>\n            </select>\n\n            <select v-else class=\"uk-form-width-large\"\n                    :name=\"fieldid\"\n                    v-bind=\"{id: fieldid, size:field.data.size > 1 ? field.data.size : false}\"\n                    v-model=\"inputValue\"\n                    v-validate:required=\"fieldRequired\">\n                <option v-for=\"option in field.options\" :value=\"option.value\">{{ option.text }}</option>\n            </select>\n\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please select a value' | trans }}</p>\n        </div>\n    </div>";
+	module.exports = "\n\n    <div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n        </label>\n\n        <div class=\"uk-form-controls\">\n\n            <select v-if=\"field.data.multiple\" class=\"uk-form-width-large\" multiple=\"multiple\"\n                    :name=\"fieldid\"\n                    v-bind=\"{id: fieldid, size:field.data.size > 1 ? field.data.size : false}\"\n                    v-model=\"inputValue\"\n                    v-validate:required=\"fieldRequired\">\n                <option v-for=\"option in field.options\" :value=\"option.value\">{{ option.text }}</option>\n            </select>\n\n            <select v-else class=\"uk-form-width-large\"\n                    :name=\"fieldid\"\n                    v-bind=\"{id: fieldid, size:field.data.size > 1 ? field.data.size : false}\"\n                    v-model=\"inputValue\"\n                    v-validate:required=\"fieldRequired\">\n                <option v-for=\"option in field.options\" :value=\"option.value\">{{ option.text }}</option>\n            </select>\n\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please select a value' | trans }}</p>\n        </div>\n    </div>\n\n";
 
 /***/ }
 

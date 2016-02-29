@@ -45,10 +45,12 @@ var BixieFieldtypes =
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
-
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(1)
+	__vue_template__ = __webpack_require__(3)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(4)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -57,19 +59,18 @@ var BixieFieldtypes =
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	// <template>
-
+	//
 	//     <div>
 	//         <component v-for="field in fields | orderBy 'priority'"
 	//                    :is="field.type"
@@ -78,12 +79,12 @@ var BixieFieldtypes =
 	//                    :is-admin="isAdmin"
 	//                    :form="form"></component>
 	//     </div>
-
+	//
 	// </template>
-
+	//
 	// <script>
 
-	window.BixieFieldtypeMixin = __webpack_require__(3);
+	window.BixieFieldtypeMixin = __webpack_require__(2);
 	window.BixieFieldtypes = module.exports = {
 
 	    props: {
@@ -114,9 +115,11 @@ var BixieFieldtypes =
 	});
 
 	// </script>
+	//
+	//
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -204,10 +207,10 @@ var BixieFieldtypes =
 	};
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\n        <component v-for=\"field in fields | orderBy 'priority'\"\n                   :is=\"field.type\"\n                   :field=\"field\"\n                   :model=\"model\"\n                   :is-admin=\"isAdmin\"\n                   :form=\"form\"></component>\n    </div>";
+	module.exports = "\n\n    <div>\n        <component v-for=\"field in fields | orderBy 'priority'\"\n                   :is=\"field.type\"\n                   :field=\"field\"\n                   :model=\"model\"\n                   :is-admin=\"isAdmin\"\n                   :form=\"form\"></component>\n    </div>\n\n";
 
 /***/ }
 /******/ ]);

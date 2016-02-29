@@ -44,10 +44,12 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(2)
-
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(1)
+	__vue_template__ = __webpack_require__(2)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(3)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -56,40 +58,39 @@
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	// <template>
-
+	//
 	//     <div class="uk-form uk-form-horizontal">
-
+	//
 	//         <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
 	//             <div data-uk-margin>
-
+	//
 	//                 <h2 class="uk-margin-remove">{{ 'Bixie Framework Settings' | trans }}</h2>
-
+	//
 	//             </div>
 	//             <div data-uk-margin>
-
+	//
 	//                 <button class="uk-button uk-button-primary" @click="save">{{ 'Save' | trans }}</button>
-
+	//
 	//             </div>
 	//         </div>
-
+	//
 	//         <div>Nothing to set yet</div>
-
+	//
 	//     </div>
-
+	//
 	// </template>
-
+	//
 	// <script>
 
 	module.exports = {
@@ -120,12 +121,13 @@
 	window.Extensions.components['settings-bixframework'] = module.exports;
 
 	// </script>
+	//
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"uk-form uk-form-horizontal\">\n\n        <div class=\"uk-margin uk-flex uk-flex-space-between uk-flex-wrap\" data-uk-margin>\n            <div data-uk-margin>\n\n                <h2 class=\"uk-margin-remove\">{{ 'Bixie Framework Settings' | trans }}</h2>\n\n            </div>\n            <div data-uk-margin>\n\n                <button class=\"uk-button uk-button-primary\" @click=\"save\">{{ 'Save' | trans }}</button>\n\n            </div>\n        </div>\n\n        <div>Nothing to set yet</div>\n\n    </div>";
+	module.exports = "\n\n    <div class=\"uk-form uk-form-horizontal\">\n\n        <div class=\"uk-margin uk-flex uk-flex-space-between uk-flex-wrap\" data-uk-margin>\n            <div data-uk-margin>\n\n                <h2 class=\"uk-margin-remove\">{{ 'Bixie Framework Settings' | trans }}</h2>\n\n            </div>\n            <div data-uk-margin>\n\n                <button class=\"uk-button uk-button-primary\" @click=\"save\">{{ 'Save' | trans }}</button>\n\n            </div>\n        </div>\n\n        <div>Nothing to set yet</div>\n\n    </div>\n\n";
 
 /***/ }
 /******/ ]);

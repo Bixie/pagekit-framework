@@ -40,15 +40,16 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(12)
-
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(1)
+	__vue_template__ = __webpack_require__(2)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(13)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
@@ -57,55 +58,41 @@
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
-
-/***/ 12:
+/* 1 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	// <template>
-
+	//
 	//     <div :class="classes(['uk-form-row'], field.data.classSfx)">
-
 	//         <span class="uk-form-label" v-show="!field.data.hide_label">{{ fieldLabel | trans }}
-
 	//             <a v-if="field.data.help_text && field.data.help_show == 'tooltip_icon'"
-
 	//                class="uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right"
-
 	//                :title="field.data.help_text" data-uk-tooltip="{delay: 100}"></a>
-
 	//         </span>
-
+	//
 	//         <div class="uk-form-controls uk-form-controls-text">
-
 	//             <p v-for="option in field.options" class="uk-form-controls-condensed">
-
 	//                 <label><input type="checkbox" value="{{ option.value }}"
-
 	//                               v-model="inputValue"> {{ option.text }}</label>
-
 	//             </p>
-
+	//
 	//             <p v-if="field.data.help_text && field.data.help_show == 'block'"
-
 	//                class="uk-form-help-block">{{{field.data.help_text}}}</p>
-
+	//
 	//             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
-
 	//                 'Please select a value' | trans }}</p>
-
 	//         </div>
-
 	//     </div>
-
+	//
 	// </template>
-
+	//
 	// <script>
 
 	module.exports = {
@@ -127,14 +114,13 @@
 	window.BixieFieldtypes.components['checkbox'] = module.exports;
 
 	// </script>
+	//
 
 /***/ },
-
-/***/ 13:
+/* 2 */
 /***/ function(module, exports) {
 
-	module.exports = "<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\r\n        <span class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\r\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\r\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\r\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\r\n        </span>\r\n\r\n        <div class=\"uk-form-controls uk-form-controls-text\">\r\n            <p v-for=\"option in field.options\" class=\"uk-form-controls-condensed\">\r\n                <label><input type=\"checkbox\" value=\"{{ option.value }}\"\r\n                              v-model=\"inputValue\"> {{ option.text }}</label>\r\n            </p>\r\n\r\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\r\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\r\n\r\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\r\n                'Please select a value' | trans }}</p>\r\n        </div>\r\n    </div>";
+	module.exports = "\r\n\r\n    <div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\r\n        <span class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\r\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\r\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\r\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\r\n        </span>\r\n\r\n        <div class=\"uk-form-controls uk-form-controls-text\">\r\n            <p v-for=\"option in field.options\" class=\"uk-form-controls-condensed\">\r\n                <label><input type=\"checkbox\" value=\"{{ option.value }}\"\r\n                              v-model=\"inputValue\"> {{ option.text }}</label>\r\n            </p>\r\n\r\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\r\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\r\n\r\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\r\n                'Please select a value' | trans }}</p>\r\n        </div>\r\n    </div>\r\n\r\n";
 
 /***/ }
-
-/******/ });
+/******/ ]);
