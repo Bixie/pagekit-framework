@@ -45,6 +45,12 @@ return [
 			foreach ($app->module('bixie/framework')->getFieldTypes() as $fieldType) {
 				$fieldType->registerScripts($scripts);
 			}
+		},
+
+		'console.init' => function ($event, $console) {
+
+			$console->add(new Bixie\Framework\Console\Commands\TranslateCommand());
+
 		}
 	]
 
