@@ -69,8 +69,11 @@ module.exports = {
         fieldRequired: function () {
             return this.field.data.required && !this.isAdmin ? true : false;
         },
+        fieldRequiredMessage: function () {
+            return this.field.data.requiredError || this.$trans('Please enter a value');
+        },
         fieldLabel: function () {
-            return this.isAdmin ? 'Default value' : this.field.label;
+            return this.isAdmin ? this.$trans('Default value') : this.field.label;
         }
     },
 
