@@ -26,8 +26,14 @@
             <p v-if="field.data.help_text && field.data.help_show == 'block'"
                class="uk-form-help-block">{{{field.data.help_text}}}</p>
 
-            <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
-                'Please enter a value' | trans }}</p>
+            <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">
+                <span v-if="field.data.requiredError">
+                    {{ field.data.requiredError | trans }}
+                </span>
+                <span v-else>
+                    {{ 'Please enter a value' | trans }}
+                </span>
+            </p>
         </div>
     </div>
 
