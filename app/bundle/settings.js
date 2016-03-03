@@ -127,7 +127,7 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n    <div class=\"uk-form uk-form-horizontal\">\n\n        <div class=\"uk-margin uk-flex uk-flex-space-between uk-flex-wrap\" data-uk-margin>\n            <div data-uk-margin>\n\n                <h2 class=\"uk-margin-remove\">{{ 'Bixie Framework Settings' | trans }}</h2>\n\n            </div>\n            <div data-uk-margin>\n\n                <button class=\"uk-button uk-button-primary\" @click=\"save\">{{ 'Save' | trans }}</button>\n\n            </div>\n        </div>\n\n        <div>Nothing to set yet</div>\n\n    </div>\n\n";
+	module.exports = "\r\n\r\n    <div class=\"uk-form uk-form-horizontal\">\r\n\r\n        <div class=\"uk-margin uk-flex uk-flex-space-between uk-flex-wrap\" data-uk-margin>\r\n            <div data-uk-margin>\r\n\r\n                <h2 class=\"uk-margin-remove\">{{ 'Bixie Framework Settings' | trans }}</h2>\r\n\r\n            </div>\r\n            <div data-uk-margin>\r\n\r\n                <button class=\"uk-button uk-button-primary\" @click=\"save\">{{ 'Save' | trans }}</button>\r\n\r\n            </div>\r\n        </div>\r\n\r\n        <div>Nothing to set yet</div>\r\n\r\n    </div>\r\n\r\n";
 
 /***/ }
 /******/ ]);

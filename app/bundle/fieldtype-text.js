@@ -88,8 +88,7 @@
 	//             <p v-if="field.data.help_text && field.data.help_show == 'block'"
 	//                class="uk-form-help-block">{{{field.data.help_text}}}</p>
 	//
-	//             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ field.data.requiredError ||
-	//                 'Please enter a value' | trans }}</p>
+	//             <p class="uk-form-help-block uk-text-danger" v-show="fieldInvalid(form)">{{ fieldRequiredMessage }}</p>
 	//         </div>
 	//     </div>
 	//
@@ -129,7 +128,7 @@
 /***/ 19:
 /***/ function(module, exports) {
 
-	module.exports = "\n\n    <div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n        </label>\n\n        <div class=\"uk-form-controls\">\n            <input type=\"text\" class=\"uk-form-width-large\" placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                   :name=\"fieldid\" :id=\"fieldid\"\n                   v-model=\"inputValue\"\n                   v-validate:required=\"fieldRequired\">\n\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ field.data.requiredError ||\n                'Please enter a value' | trans }}</p>\n        </div>\n    </div>\n\n";
+	module.exports = "\r\n\r\n    <div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\r\n        <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\r\n            <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\r\n               class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\r\n               :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\r\n        </label>\r\n\r\n        <div class=\"uk-form-controls\">\r\n            <input type=\"text\" class=\"uk-form-width-large\" placeholder=\"{{ field.data.placeholder || '' | trans }}\"\r\n                   :name=\"fieldid\" :id=\"fieldid\"\r\n                   v-model=\"inputValue\"\r\n                   v-validate:required=\"fieldRequired\">\r\n\r\n            <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\r\n               class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\r\n\r\n            <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ fieldRequiredMessage }}</p>\r\n        </div>\r\n    </div>\r\n\r\n";
 
 /***/ }
 

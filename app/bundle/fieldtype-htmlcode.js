@@ -173,7 +173,7 @@
 /* 11 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n    <div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\n\n        {{{ fieldValue.formatted[0] }}}\n\n    </div>\n\n";
+	module.exports = "\r\n\r\n    <div :class=\"classes(['uk-form-row', (isAdmin ? 'uk-hidden' : '')], field.data.classSfx)\">\r\n\r\n        {{{ fieldValue.formatted[0] }}}\r\n\r\n    </div>\r\n\r\n";
 
 /***/ }
 /******/ ]);

@@ -193,8 +193,11 @@ var BixieFieldtypes =
 	        fieldRequired: function () {
 	            return this.field.data.required && !this.isAdmin ? true : false;
 	        },
+	        fieldRequiredMessage: function () {
+	            return this.field.data.requiredError || this.$trans('Please enter a value');
+	        },
 	        fieldLabel: function () {
-	            return this.isAdmin ? 'Default value' : this.field.label;
+	            return this.isAdmin ? this.$trans('Default value') : this.field.label;
 	        }
 	    },
 
@@ -210,7 +213,7 @@ var BixieFieldtypes =
 /* 3 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n    <div>\n        <component v-for=\"field in fields | orderBy 'priority'\"\n                   :is=\"field.type\"\n                   :field=\"field\"\n                   :model=\"model\"\n                   :is-admin=\"isAdmin\"\n                   :form=\"form\"></component>\n    </div>\n\n";
+	module.exports = "\r\n\r\n    <div>\r\n        <component v-for=\"field in fields | orderBy 'priority'\"\r\n                   :is=\"field.type\"\r\n                   :field=\"field\"\r\n                   :model=\"model\"\r\n                   :is-admin=\"isAdmin\"\r\n                   :form=\"form\"></component>\r\n    </div>\r\n\r\n";
 
 /***/ }
 /******/ ]);

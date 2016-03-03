@@ -49,6 +49,7 @@
 	    //components
 	    Vue.component('input-category', __webpack_require__(1));
 	    Vue.component('input-tags', __webpack_require__(4));
+	    __webpack_require__(15);
 	    //directives
 	    Vue.directive('spinner', __webpack_require__(7));
 	    //partials
@@ -431,6 +432,128 @@
 /***/ function(module, exports) {
 
 	module.exports = "<template v-for=\"field in fields\">\r\n    <dt v-if=\"field.label\">\r\n        <i v-if=\"field.tip\" class=\"uk-icon-info uk-icon-hover uk-margin-small-right\" data-uk-tooltip=\"{delay: 100}\" :title=\"field.tip\"></i>\r\n        {{ field.label }}\r\n    </dt>\r\n    <dd>\r\n        <field :config=\"field\" :values.sync=\"values\"></field>\r\n    </dd>\r\n</template>\r\n";
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(16)
+	__vue_template__ = __webpack_require__(17)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "C:\\BixieProjects\\pagekit\\pagekit\\packages\\bixie\\framework\\app\\components\\input-file.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	// <template>
+	//
+	//     <div @click=" pick" class="{{ class }}">
+	//         <ul class="uk-float-right uk-subnav pk-subnav-icon">
+	//             <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500, 'pos': 'left'}" @click.prevent="remove"></a></li>
+	//         </ul>
+	//         <a class="pk-icon-folder-circle uk-margin-right"></a>
+	//         <a v-if="!file" class="uk-text-muted">{{ 'Select file' | trans }}</a>
+	//         <a v-else data-uk-tooltip="" title="{{ file }}">{{ fileName }}</a>
+	//     </div>
+	//
+	//     <v-modal v-ref:modal large>
+	//
+	//         <panel-finder :root="storage" v-ref:finder :modal="true"></panel-finder>
+	//
+	//         <div v-show="!hasSelection()" class="uk-alert">{{ 'Select one file of the following types' | trans }}: {{ this.ext.join(', ') }}</div>
+	//
+	//         <div class="uk-modal-footer uk-text-right">
+	//             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
+	//             <button class="uk-button uk-button-primary" type="button" :disabled="!hasSelection()" @click="select()">{{ 'Select' | trans }}</button>
+	//         </div>
+	//
+	//     </v-modal>
+	//
+	// </template>
+	//
+	// <script>
+
+	module.exports = {
+
+	    props: {
+	        'file': { default: '' },
+	        'ext': { type: Array, default: [] },
+	        'multiple': { type: Boolean, default: false },
+	        'class': { default: '' } },
+
+	    data: function data() {
+	        return _.merge({}, $pagekit);
+	    },
+
+	    computed: {
+	        fileName: function fileName() {
+	            return this.file.split('/').pop();
+	        }
+	    },
+
+	    methods: {
+
+	        pick: function pick() {
+	            this.$refs.modal.open();
+	        },
+
+	        select: function select() {
+	            this.$set('file', this.$refs.finder.getSelected()[0]);
+	            this.$dispatch('file-selected', this.file);
+	            this.$refs.finder.removeSelection();
+	            this.$refs.modal.close();
+	        },
+
+	        remove: function remove(e) {
+	            e.stopPropagation();
+	            this.file = '';
+	        },
+
+	        hasSelection: function hasSelection() {
+	            var selected = this.$refs.finder.getSelected();
+	            if (!this.multiple && !(selected.length === 1)) {
+	                return false;
+	            }
+	            //todo there must be a prettier way
+	            return selected[0].match(new RegExp('\.(?:' + this.ext.join('|') + ')$', 'i'));
+	        }
+
+	    }
+
+	};
+
+	Vue.component('input-file', function (resolve, reject) {
+	    Vue.asset({
+	        js: ['app/assets/uikit/js/components/upload.min.js', 'app/system/modules/finder/app/bundle/panel-finder.js']
+	    }).then(function () {
+	        resolve(module.exports);
+	    });
+	});
+
+	// </script>
+	//
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n\r\n    <div @click=\" pick\" class=\"{{ class }}\">\r\n        <ul class=\"uk-float-right uk-subnav pk-subnav-icon\">\r\n            <li><a class=\"pk-icon-delete pk-icon-hover\" title=\"{{ 'Delete' | trans }}\" data-uk-tooltip=\"{delay: 500, 'pos': 'left'}\" @click.prevent=\"remove\"></a></li>\r\n        </ul>\r\n        <a class=\"pk-icon-folder-circle uk-margin-right\"></a>\r\n        <a v-if=\"!file\" class=\"uk-text-muted\">{{ 'Select file' | trans }}</a>\r\n        <a v-else data-uk-tooltip=\"\" title=\"{{ file }}\">{{ fileName }}</a>\r\n    </div>\r\n\r\n    <v-modal v-ref:modal large>\r\n\r\n        <panel-finder :root=\"storage\" v-ref:finder :modal=\"true\"></panel-finder>\r\n\r\n        <div v-show=\"!hasSelection()\" class=\"uk-alert\">{{ 'Select one file of the following types' | trans }}: {{ this.ext.join(', ') }}</div>\r\n\r\n        <div class=\"uk-modal-footer uk-text-right\">\r\n            <button class=\"uk-button uk-button-link uk-modal-close\" type=\"button\">{{ 'Cancel' | trans }}</button>\r\n            <button class=\"uk-button uk-button-primary\" type=\"button\" :disabled=\"!hasSelection()\" @click=\"select()\">{{ 'Select' | trans }}</button>\r\n        </div>\r\n\r\n    </v-modal>\r\n\r\n";
 
 /***/ }
 /******/ ]);
