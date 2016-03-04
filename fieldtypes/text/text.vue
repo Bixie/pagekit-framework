@@ -8,7 +8,15 @@
         </label>
 
         <div class="uk-form-controls">
-            <input type="text" class="uk-form-width-large" placeholder="{{ field.data.placeholder || '' | trans }}"
+            <input v-if="minLength || maxLength" type="text" class="uk-form-width-large" placeholder="{{ field.data.placeholder || '' | trans }}"
+                   :name="fieldid" :id="fieldid"
+                   v-model="inputValue"
+                   v-validate:required="fieldRequired"
+                   minlength="{{ field.data.minLength }}"
+                   maxlength="{{ field.data.maxLength }}"
+                   v-validate:minLength="minLength"
+                   v-validate:maxLength="maxLength">
+            <input v-else type="text" class="uk-form-width-large" placeholder="{{ field.data.placeholder || '' | trans }}"
                    :name="fieldid" :id="fieldid"
                    v-model="inputValue"
                    v-validate:required="fieldRequired">
@@ -33,6 +41,16 @@
                 type: 'text',
                 label: 'Placeholder',
                 attrs: {'class': 'uk-form-width-large'}
+            },
+            'minLength': {
+                type: 'number',
+                label: 'Min length input',
+                attrs: {'class': 'uk-form-width-small uk-text-right', 'min': 0}
+            },
+            'maxLength': {
+                type: 'number',
+                label: 'Max length input',
+                attrs: {'class': 'uk-form-width-small uk-text-right', 'min': 0}
             }
         },
 
@@ -42,6 +60,21 @@
             return {
                 fieldid: _.uniqueId('formmakerfield_')
             };
+        },
+
+        created: function () {
+            //defaults admin
+            this.field.data.minLength = this.field.data.minLength || 0;
+            this.field.data.maxLength = this.field.data.maxLength || 0;
+        },
+
+        computed: {
+            minLength: function () {
+                return this.field.data.minLength && !this.isAdmin ? this.field.data.minLength : false;
+            },
+            maxLength: function () {
+                return this.field.data.maxLength && !this.isAdmin ? this.field.data.maxLength : false;
+            }
         }
 
     };
