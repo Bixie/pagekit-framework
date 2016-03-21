@@ -63,6 +63,13 @@ abstract class FieldValueBase implements FieldValueInterface {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function hasValue () {
+		return !empty($this->value);
+	}
+
+	/**
 	 * @param mixed $value
 	 * @return FieldValueBase
 	 */
