@@ -71,11 +71,26 @@ abstract class FieldValueBase implements FieldValueInterface {
 
 	/**
 	 * @param mixed $value
+	 * @param array $valuedata
 	 * @return FieldValueBase
 	 */
-	public function setValue ($value) {
+	public function setValue ($value, $valuedata = []) {
 		$this->value = is_array($value) ? $value : (!empty($value) ? [$value] : []);
+		$this->setValuedata($valuedata);
 		return $this;
+	}
+
+	/**
+	 * @param array $valuedata
+	 */
+	protected function setValuedata ($valuedata) {
+		$this->getValuedata();
+		foreach ($this->value as $i => $val) {
+			$valueKey = 'data' . $i;
+			if (isset($valuedata[$valueKey])) {
+				$this->valuedata[$valueKey] = array_merge(['value' => $val], $valuedata[$valueKey]);
+			}
+		}
 	}
 
 	/**
