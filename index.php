@@ -10,6 +10,10 @@ return [
 
 	'fieldtypes' => 'fieldtypes',
 
+	'autoload' => [
+		'Bixie\\Framework\\' => 'src'
+	],
+	
 	'resources' => [
 
 		'bixie/framework:' => ''
