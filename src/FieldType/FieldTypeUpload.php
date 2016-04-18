@@ -67,12 +67,15 @@ class FieldTypeUpload extends FieldTypeBase {
 				if (!$size = $file->getClientSize() or $size > ($fieldValue->field->get('max_size', 0) * 1024 * 1024)) {
 					return $this->error(__('File is too large.'));
 				}
-				//give file unique name
-				$localFile = $file->move($path, sprintf('%d%d-%s',
-					(microtime(true) * 10000), rand(), preg_replace("/[^a-zA-Z0-9\.]/", "-", $file->getClientOriginalName())));
+				//give file unique name with correct extension
+				$local_name = sprintf('%d%d-%s',
+					(microtime(true) * 10000), rand(), preg_replace("/[^a-zA-Z0-9\.]/", "-", $file->getClientOriginalName()));
+				$local_name = rtrim($local_name, '.' . $ext) . '.' . $ext;
+
+				$localFile = $file->move($path, $local_name);
 
 				$fileInfo[] = [
-					'name' => $file->getClientOriginalName(),
+					'name' => basename($localFile),
 					'size' => $localFile->getSize(),
 					'path' => str_replace(App::path(), '', $localFile->getPathname()),
 					'url'  => ltrim(App::url()->getStatic($localFile->getPathname(), [], 'base'), '/')
