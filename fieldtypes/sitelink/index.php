@@ -18,6 +18,9 @@ return [
 	'dependancies' => ['editor'],
 	'formatValue' => function (\Bixie\Framework\Field\FieldBase $field, \Bixie\Framework\FieldValue\FieldValueBase $fieldValue) {
 		return array_map(function ($site) use ($field) {
+			if (empty($site['value'])) {
+				return '-';
+			}
 			$blank = (!empty($site['blank']) ? 1 : $field->get('blank_default', 0)) ? ' target="_blank"' : '';
 			$class = $field->get('href_class') ? ' class="' . $field->get('href_class') . '"' : '';
 			$link_text = !empty($site['link_text']) ? $site['link_text'] : $field->get('link_text_default', $site['value']);
