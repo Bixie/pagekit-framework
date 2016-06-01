@@ -4,7 +4,7 @@ return [
 	'label' => __('Checkboxes'),
 	'config' => [
 		'hasOptions' => 1,
-		'required' => 0,
+		'required' => -1,
 		'multiple' => 1,
 	]
 ];
