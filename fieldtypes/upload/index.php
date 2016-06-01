@@ -7,7 +7,7 @@ return [
 	'autoload' => ['Bixie\\Framework\\FieldType\\Upload\\' => 'src'],
 	'config' => [
 		'hasOptions' => 0,
-		'required' => 0,
+		'required' => -1,
 		'multiple' => 1,
 		'path' => 'uploads',
 		'allowed' => ['png', 'jpg', 'jpeg', 'gif', 'svg'],
