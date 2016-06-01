@@ -4,7 +4,7 @@ return [
 	'label' => __('Date of birth'),
 	'config' => [
 		'hasOptions' => 0,
-		'required' => 0,
+		'required' => -1,
 		'multiple' => 0,
 		'dateFormat' => 'MM-DD-YYYY',
 		'minAge' => 12,
