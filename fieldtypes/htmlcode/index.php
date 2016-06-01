@@ -6,7 +6,7 @@ return [
 	'label' => __('Html code'),
 	'config' => [
 		'hasOptions' => 0,
-		'required' => 0,
+		'required' => -1,
 		'multiple' => 0,
 		'markdown' => ''
 	],
