@@ -3,7 +3,19 @@
 namespace Bixie\Framework\Traits;
 
 
+use Pagekit\Util\Arr;
+
 trait JsonSerializableTrait {
+
+	/**
+	 * JsonSerializable constructor.
+	 * @param array  $data
+	 */
+	public function __construct (array $data = []) {
+		foreach (get_object_vars($this) as $key => $default) {
+			$this->$key = Arr::get($data, $key, $default);
+		}
+	}
 
 	/**
 	 * @param array $data
