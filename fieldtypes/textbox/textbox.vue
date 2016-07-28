@@ -14,8 +14,8 @@
                       v-bind="{id: fieldid, rows: field.data.rows}"
                       v-model="inputValue"
                       v-validate:required="fieldRequired"
-                      v-validate:minLength="minLength"
-                      v-validate:maxLength="maxLength"></textarea>
+                      v-validate:min-length="minLength"
+                      v-validate:max-length="maxLength"></textarea>
 
             <textarea v-else class="uk-form-width-large"
                       placeholder="{{ field.data.placeholder || '' | trans }}"
