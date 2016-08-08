@@ -59,9 +59,9 @@
 	}
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
+	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "C:\\BixieProjects\\pagekit\\pagekit\\packages\\bixie\\framework\\fieldtypes\\textbox\\textbox.vue"
+	  var id = "./textbox.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -137,7 +137,7 @@
 /***/ 21:
 /***/ function(module, exports) {
 
-	module.exports = "\n\n<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n    <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n        <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n           class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n           :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n    </label>\n\n    <div class=\"uk-form-controls\">\n        <textarea v-if=\"minLength || maxLength\" class=\"uk-form-width-large\"\n                  placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                  :name=\"fieldid\"\n                  v-bind=\"{id: fieldid, rows: field.data.rows}\"\n                  v-model=\"inputValue\"\n                  v-validate:required=\"fieldRequired\"\n                  v-validate:minLength=\"minLength\"\n                  v-validate:maxLength=\"maxLength\"></textarea>\n\n        <textarea v-else class=\"uk-form-width-large\"\n                  placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                  v-bind=\"{name: fieldid, id: fieldid, rows: field.data.rows}\"\n                  v-model=\"inputValue\"\n                  v-validate:required=\"fieldRequired\"></textarea>\n\n        <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n           class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n        <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ fieldRequiredMessage }}</p>\n    </div>\n</div>\n\n";
+	module.exports = "\n\n<div :class=\"classes(['uk-form-row'], field.data.classSfx)\">\n    <label :for=\"fieldid\" class=\"uk-form-label\" v-show=\"!field.data.hide_label\">{{ fieldLabel | trans }}\n        <a v-if=\"field.data.help_text && field.data.help_show == 'tooltip_icon'\"\n           class=\"uk-icon-info uk-icon-hover uk-margin-small-top uk-float-right\"\n           :title=\"field.data.help_text\" data-uk-tooltip=\"{delay: 100}\"></a>\n    </label>\n\n    <div class=\"uk-form-controls\">\n        <textarea v-if=\"minLength || maxLength\" class=\"uk-form-width-large\"\n                  placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                  :name=\"fieldid\"\n                  v-bind=\"{id: fieldid, rows: field.data.rows}\"\n                  v-model=\"inputValue\"\n                  v-validate:required=\"fieldRequired\"\n                  v-validate:minlength=\"minLength\"\n                  v-validate:maxlength=\"maxLength\"></textarea>\n\n        <textarea v-else class=\"uk-form-width-large\"\n                  placeholder=\"{{ field.data.placeholder || '' | trans }}\"\n                  v-bind=\"{name: fieldid, id: fieldid, rows: field.data.rows}\"\n                  v-model=\"inputValue\"\n                  v-validate:required=\"fieldRequired\"></textarea>\n\n        <p v-if=\"field.data.help_text && field.data.help_show == 'block'\"\n           class=\"uk-form-help-block\">{{{field.data.help_text}}}</p>\n\n        <p class=\"uk-form-help-block uk-text-danger\" v-show=\"fieldInvalid(form)\">{{ fieldRequiredMessage }}</p>\n    </div>\n</div>\n\n";
 
 /***/ }
 
