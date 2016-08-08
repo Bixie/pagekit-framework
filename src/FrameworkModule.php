@@ -2,6 +2,7 @@
 
 namespace Bixie\Framework;
 
+use Bixie\Framework\Helpers\ImageHelper;
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Bixie\Framework\FieldType\FieldTypeBase;
@@ -19,6 +20,11 @@ class FrameworkModule extends Module {
 	 */
 	public function main (App $app) {
 		$app['filter']->register('filesize', 'Bixie\Framework\Filter\FileSizeFilter');
+        $app->on('boot', function ($event, $app) {
+            $app->extend('view', function ($view) use ($app) {
+                return $view->addHelper(new ImageHelper($app));
+            });
+        });
 	}
 
 	/**
@@ -96,6 +102,29 @@ class FrameworkModule extends Module {
 		}
 		$this->fieldTypes[$package['id']] = new $package['class']($package);
 	}
+
+    /**
+     * @return bool|string
+     */
+    public function getImageCachepath () {
+        if ($folder = App::locator()->get(App::module('bixie/framework')->config('image_cache_path'))
+                and is_writable($folder)) { //all fine, quick return
+            return $folder;
+        }
+        //try to create user-folder
+        App::file()->makeDir($folder, 0755);
+        if (!file_exists($folder)) {
+            //create default folder
+            $folder = $this->app['path.storage'] . '/bixframework';
+            if (!file_exists($folder)) {
+                App::file()->makeDir($folder, 0755);
+            }
+        }
+        if (!file_exists($folder) || !is_writable($folder)) { //give up
+            return false;
+        }
+        return $folder;
+    }
 
 	/**
 	 * Resolves a path to a absolute module path.

@@ -1,4 +1,5 @@
 <?php
+use Pagekit\Application as App;
 
 return [
 
@@ -13,8 +14,19 @@ return [
 	'autoload' => [
 		'Bixie\\Framework\\' => 'src'
 	],
-	
-	'resources' => [
+
+    'routes' => [
+
+        '/api/bixframework' => [
+            'name' => '@bixframework/api',
+            'controller' => [
+                'Bixie\\Framework\\Controller\\ImageApiController'
+            ]
+        ]
+
+    ],
+
+    'resources' => [
 
 		'bixie/framework:' => ''
 
@@ -31,7 +43,7 @@ return [
 	'settings' => 'settings-bixframework',
 
 	'config' => [
-
+        'image_cache_path' => trim(str_replace(App::path(), '', App::get('path.storage') . '/bixframework'), '/'),
 	],
 
 	'events' => [

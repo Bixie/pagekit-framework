@@ -18,6 +18,9 @@
       "Bixie\\Framework\\": "src"
     }
   },
+  "require": {
+    "abeautifulsite/simpleimage": "2.5.*"
+  },
   "extra": {
     "icon": "icon.svg"
   }
