@@ -3,6 +3,10 @@ if (window.Vue) {
     //components
     Vue.component('input-category', require('./components/input-category.vue'));
     Vue.component('input-tags', require('./components/input-tags.vue'));
+    Vue.component('input-folder', require('./components/input-folder.vue'));
+    Vue.component('input-prices', require('./components/input-prices.vue'));
+    Vue.component('input-related-item', require('./components/input-related-item.vue'));
+    Vue.component('input-related-items', require('./components/input-related-items.vue'));
     require('./components/input-file.vue');
     //directives
     Vue.directive('spinner', require('./directives/spinner'));
