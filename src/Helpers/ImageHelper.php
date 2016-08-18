@@ -65,9 +65,9 @@ class ImageHelper extends Helper {
 	 */
 	protected function validResource ($resource) {
 		$resource = array_replace(['src' => ''], (array)$resource);
-		if (!App::locator()->get($resource['src'])) {
+		if (!$resource['src'] || !App::locator()->get($resource['src'])) {
 		    //try to find encoded filename
-            if ($path = App::locator()->get(urldecode($resource['src']))) {
+            if ($resource['src'] and $path = App::locator()->get(urldecode($resource['src']))) {
                 $resource['src'] = $this->basePath($path);
                 return $resource;
             }

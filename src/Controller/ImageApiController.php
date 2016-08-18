@@ -48,7 +48,7 @@ class ImageApiController
 			$data['title'] = preg_replace('/\s?+\d+$/', '', $data['title']);
 
 			// replace underscores with space and add capital
-			$data['title'] = ucfirst(trim(str_replace('_', ' ', $data['title'])));
+			$data['title'] = ucfirst(trim(str_replace(['_', '-'], ' ', $data['title'])));
 
             $data['image']['src'] = $folder.'/'.basename($img);
             $data['image']['alt'] = $data['title'];
