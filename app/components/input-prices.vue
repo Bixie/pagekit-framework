@@ -33,7 +33,7 @@
                         <label class="uk-form-label">{{ 'Price' | trans }}</label>
                         <div class="uk-form-controls">
                             <i class="uk-icon-euro uk-margin-small-right"></i>
-                            <input v-model="price.wholesale_price" type="number" class="uk-width-8-10 uk-text-right"
+                            <input v-model="price.price" type="number" class="uk-width-8-10 uk-text-right"
                                    step="0.01" min="0" number/>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                 this.prices.push({
                     min_quantity: 1,
                     max_quantity: 1,
-                    wholesale_price: 0,
+                    price: 0,
                     currency: 'EUR'
                 });
             },
