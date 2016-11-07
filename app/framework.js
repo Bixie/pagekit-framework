@@ -7,6 +7,7 @@ if (window.Vue) {
     Vue.component('input-prices', require('./components/input-prices.vue'));
     Vue.component('input-related-item', require('./components/input-related-item.vue'));
     Vue.component('input-related-items', require('./components/input-related-items.vue'));
+    Vue.component('table-list', require('./components/table-list.vue'));
     require('./components/input-file.vue');
     //directives
     Vue.directive('spinner', require('./directives/spinner'));
@@ -15,6 +16,6 @@ if (window.Vue) {
     Vue.partial('fieldtype-settings', require('./templates/fieldtype-settings.html'));
     Vue.partial('fieldtype-appearance', require('./templates/fieldtype-appearance.html'));
     //fields
-    require('./form-fields/fields')(Vue);
+    require('./form-fields/fields');
 
 }

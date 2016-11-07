@@ -4,6 +4,6 @@
         {{ field.label }}
     </dt>
     <dd>
-        <field :config="field" :values.sync="values"></field>
+        <component :is="field.type" :field="field"></component>
     </dd>
 </template>

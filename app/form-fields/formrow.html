@@ -4,7 +4,7 @@
         {{ field.label | trans }}
     </label>
     <div v-if="!field.raw" class="uk-form-controls" :class="{'uk-form-controls-text': ['checkbox', 'radio'].indexOf(field.type)>-1}">
-        <field :config="field" :values.sync="values"></field>
+        <component :is="field.type" :field="field"></component>
     </div>
-    <field v-else :config="field" :values.sync="values"></field>
+    <component v-else :is="field.type" :field="field"></component>
 </div>
