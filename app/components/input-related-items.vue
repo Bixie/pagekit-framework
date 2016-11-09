@@ -109,10 +109,6 @@
                 return this.selected === item;
             }
 
-        },
-
-        components: {
-            'table-list': require('./table-list.vue')
         }
     };
 

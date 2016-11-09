@@ -9,7 +9,7 @@
         </div>
 
         <p>
-            <button type="button" class="uk-button uk-button-small" @click="pick">{{ 'Please select' | trans }}</button>
+            <button type="button" class="uk-button" :class="buttonClass" @click="pick">{{ 'Please select' | trans }}</button>
         </p>
 
         <v-modal v-ref:modal large>
@@ -50,6 +50,7 @@
             'name': {type: String, default: 'items'},
             'identifier': {type: String, default: 'id'},
             'label': {type: String, default: 'title'},
+            'buttonClass': {type: String, default: 'uk-button-small'},
             'extra_key': {type: String, default: 'slug'},
             'onSelect': {type: Function, default: function () {_.noop()}},
             'onRemove': {type: Function, default: function () {_.noop()}}
@@ -97,10 +98,6 @@
                 return this.selected === item;
             }
 
-        },
-
-        components: {
-            'table-list': require('./table-list.vue')
         }
 
     };
